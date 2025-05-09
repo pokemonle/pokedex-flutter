@@ -114,8 +114,9 @@ class InfoRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: Text(
-              "$label:",
+            child: TranslationWidget(
+              namespace: "default",
+              textKey: label,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
