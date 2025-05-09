@@ -1,8 +1,8 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:pokedex/providers/translation.dart';
+import 'package:pokedex/widgets/translation.dart';
+import 'package:pokedex/providers/navigation.dart';
 import 'package:pokedex/screens/home.dart';
 import 'package:pokedex/screens/settings.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -69,49 +69,103 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Row(
-        children: <Widget>[
-          NavigationRail(
-            selectedIndex: _selectedIndex,
-            onDestinationSelected: (int index) {
-              setState(() {
-                _selectedIndex = index;
-              });
-            },
-            labelType: NavigationRailLabelType.selected,
-            leading: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20.0),
-              child: Icon(
-                Icons.catching_pokemon,
-                size: 40,
+    final useSideNavigation = ref.watch(navigationModeProvider);
+
+    if (useSideNavigation) {
+      return Scaffold(
+        body: Row(
+          children: <Widget>[
+            NavigationRail(
+              selectedIndex: _selectedIndex,
+              onDestinationSelected: (int index) {
+                setState(() {
+                  _selectedIndex = index;
+                });
+              },
+              labelType: NavigationRailLabelType.selected,
+              leading: Padding(
+                padding: const EdgeInsets.symmetric(vertical: 20.0),
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.catching_pokemon,
+                      size: 40,
+                      color:
+                          Theme.of(context).brightness == Brightness.dark
+                              ? Colors.white
+                              : Theme.of(context).colorScheme.primary,
+                    ),
+                    Text(
+                      'Pokedex',
+                      style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                        color:
+                            Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Theme.of(context).colorScheme.primary,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              destinations: const <NavigationRailDestination>[
+                NavigationRailDestination(
+                  icon: Icon(Icons.home_outlined),
+                  selectedIcon: Icon(Icons.home),
+                  label: TranslationWidget(
+                    namespace: 'default',
+                    textKey: 'Home',
+                  ),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.settings_outlined),
+                  selectedIcon: Icon(Icons.settings),
+                  label: TranslationWidget(
+                    namespace: 'default',
+                    textKey: 'Settings',
+                  ),
+                ),
+              ],
+              selectedIconTheme: IconThemeData(
                 color: Theme.of(context).colorScheme.primary,
               ),
-            ),
-            destinations: const <NavigationRailDestination>[
-              NavigationRailDestination(
-                icon: Icon(Icons.home_outlined),
-                selectedIcon: Icon(Icons.home),
-                label: Text('Home'),
+              selectedLabelTextStyle: TextStyle(
+                color: Theme.of(context).colorScheme.primary,
               ),
-              NavigationRailDestination(
-                icon: Icon(Icons.settings_outlined),
-                selectedIcon: Icon(Icons.settings),
-                label: Text('Settings'),
-              ),
-            ],
-            selectedIconTheme: IconThemeData(
-              color: Theme.of(context).colorScheme.primary,
+              elevation: 4,
             ),
-            selectedLabelTextStyle: TextStyle(
-              color: Theme.of(context).colorScheme.primary,
+            const VerticalDivider(thickness: 1, width: 1),
+            Expanded(child: _screens[_selectedIndex]),
+          ],
+        ),
+      );
+    } else {
+      return Scaffold(
+        body: _screens[_selectedIndex],
+        bottomNavigationBar: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: (int index) {
+            setState(() {
+              _selectedIndex = index;
+            });
+          },
+          items: <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home_outlined),
+              activeIcon: Icon(Icons.home),
+              label: t('default', 'Home'),
             ),
-            elevation: 4,
-          ),
-          const VerticalDivider(thickness: 1, width: 1),
-          Expanded(child: _screens[_selectedIndex]),
-        ],
-      ),
-    );
+            BottomNavigationBarItem(
+              icon: Icon(Icons.settings_outlined),
+              activeIcon: Icon(Icons.settings),
+              label: t('default', 'Settings'),
+            ),
+          ],
+          selectedItemColor: Theme.of(context).colorScheme.primary,
+          unselectedItemColor: Theme.of(
+            context,
+          ).colorScheme.onSurface.withAlpha(128),
+        ),
+      );
+    }
   }
 }

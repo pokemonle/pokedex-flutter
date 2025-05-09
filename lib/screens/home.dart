@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/api/models/models.dart';
 import 'package:pokedex/screens/resource_list.dart';
+import 'package:pokedex/widgets/translation.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -27,12 +28,12 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Home - Pokedex Resources')),
+      appBar: AppBar(title: const Text('Pokedex')),
       body: ListView(
         padding: const EdgeInsets.all(16.0),
         children: [
           _ResourceNavigationCard(
-            title: 'Abilities',
+            title: t('default', 'Abilities'),
             icon: Icons.star_outline,
             onTap:
                 () => _navigateToResourceList<Ability>(
@@ -43,7 +44,7 @@ class HomeScreen extends StatelessWidget {
                 ),
           ),
           _ResourceNavigationCard(
-            title: 'Items',
+            title: t('default', 'Items'),
             icon: Icons.backpack_outlined,
             onTap:
                 () => _navigateToResourceList<Item>(
@@ -54,7 +55,7 @@ class HomeScreen extends StatelessWidget {
                 ),
           ),
           _ResourceNavigationCard(
-            title: 'Pokemon', // Example
+            title: t('default', 'Pokemon'),
             icon: Icons.catching_pokemon_outlined,
             onTap:
                 () => _navigateToResourceList<Pokemon>(
@@ -108,9 +109,30 @@ class _ResourceNavigationCard extends StatelessWidget {
       elevation: 2,
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       child: ListTile(
-        leading: Icon(icon, size: 30, color: Theme.of(context).primaryColor),
-        title: Text(title, style: Theme.of(context).textTheme.titleLarge),
-        trailing: const Icon(Icons.arrow_forward_ios),
+        leading: Icon(
+          icon,
+          size: 30,
+          color:
+              Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Theme.of(context).primaryColor,
+        ),
+        title: Text(
+          title,
+          style: Theme.of(context).textTheme.titleLarge?.copyWith(
+            color:
+                Theme.of(context).brightness == Brightness.dark
+                    ? Colors.white
+                    : null,
+          ),
+        ),
+        trailing: Icon(
+          Icons.arrow_forward_ios,
+          color:
+              Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white70
+                  : null,
+        ),
         onTap: onTap,
       ),
     );

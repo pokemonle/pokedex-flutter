@@ -1,38 +1,91 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokedex/widgets/translation.dart';
 import '../providers/translation.dart';
+import '../providers/navigation.dart';
+import 'settings/language.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final translations = ref.watch(translationProvider);
-    final currentLanguage =
-        ref.read(translationProvider.notifier).currentLanguage;
+    final currentLanguage = ref.watch(currentLanguageProvider);
+    final useSideNavigation = ref.watch(navigationModeProvider);
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Settings')),
+      appBar: AppBar(
+        title: const TranslationWidget(
+          namespace: 'default',
+          textKey: 'Settings',
+        ),
+      ),
       body: ListView(
         children: [
           ListTile(
-            title: const Text('English'),
-            trailing: currentLanguage == 'en' ? const Icon(Icons.check) : null,
+            leading: const Icon(Icons.language),
+            title: const TranslationWidget(
+              namespace: 'default',
+              textKey: 'Language',
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  _getLanguageName(currentLanguage),
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                    color: Theme.of(
+                      context,
+                    ).colorScheme.onSurface.withAlpha(128),
+                  ),
+                ),
+                const Icon(Icons.chevron_right),
+              ],
+            ),
             onTap:
-                () => ref.read(translationProvider.notifier).setLanguage('en'),
+                () => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const LanguageSettingsScreen(),
+                  ),
+                ),
           ),
-          ListTile(
-            title: const Text('简体中文'),
-            trailing:
-                currentLanguage == 'zh-Hans' ? const Icon(Icons.check) : null,
-            onTap:
-                () => ref
-                    .read(translationProvider.notifier)
-                    .setLanguage('zh-Hans'),
+          SwitchListTile.adaptive(
+            secondary: const Icon(Icons.view_sidebar),
+            title: const TranslationWidget(
+              namespace: 'default',
+              textKey: 'Use Side Navigation',
+            ),
+            subtitle: const TranslationWidget(
+              namespace: 'default',
+              textKey: 'Use Side Navigation Description',
+            ),
+            value: useSideNavigation,
+            onChanged: (bool value) {
+              ref
+                  .read(navigationModeProvider.notifier)
+                  .setNavigationMode(value);
+            },
           ),
-          // 其他语言选项...
         ],
       ),
     );
+  }
+
+  String _getLanguageName(String code) {
+    final languages = {
+      'en': 'English',
+      'zh-Hans': '简体中文',
+      'zh-Hant': '繁體中文',
+      'ja': '日本語',
+      'kr': '한국어',
+      'fr': 'Français',
+      'de': 'Deutsch',
+      'es': 'Español',
+      'it': 'Italiano',
+      'cs': 'Čeština',
+    };
+    return languages[code] ?? code;
   }
 }
