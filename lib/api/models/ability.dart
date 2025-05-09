@@ -12,11 +12,11 @@ class Ability extends Resource {
   final bool isMainSeries;
 
   Ability({
-    required int id,
-    required String identifier,
+    required super.id,
+    required super.identifier,
     required this.generationId,
     required this.isMainSeries,
-  }) : super(id: id, identifier: identifier);
+  });
 
   factory Ability.fromJson(Map<String, dynamic> json) =>
       _$AbilityFromJson(json);

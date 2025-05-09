@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/models/models.dart';
 import 'package:pokedex/providers/resource.dart';
 import 'package:pokedex/widgets/pagination_controls.dart';
+import 'package:pokedex/widgets/translation.dart';
 
 class ResourceListScreen<T extends Resource> extends ConsumerStatefulWidget {
   final String resourceType;
@@ -23,8 +24,11 @@ class ResourceListScreen<T extends Resource> extends ConsumerStatefulWidget {
 
 class _ResourceListScreenState<T extends Resource>
     extends ConsumerState<ResourceListScreen<T>> {
-  int _currentPage = 1;
   final int _perPage = 15; // Or your desired items per page
+  late final resourceListNotifier = resourceListProvider<T>(
+    resource: widget.resourceType,
+    fromJson: widget.fromJsonFactory,
+  );
 
   String _padId(int id) {
     return id.toString().padLeft(4, '0');
@@ -32,13 +36,9 @@ class _ResourceListScreenState<T extends Resource>
 
   @override
   Widget build(BuildContext context) {
-    final resourceListNotifier = resourceListProvider<T>(
-      resource: widget.resourceType,
-      fromJson: widget.fromJsonFactory,
-    );
-
+    final currentPage = ref.watch(currentPageProvider);
     final asyncResourceList = ref.watch(
-      resourceListNotifier((page: _currentPage, perPage: _perPage)),
+      resourceListNotifier((page: currentPage, perPage: _perPage)),
     );
 
     return Scaffold(
@@ -52,12 +52,10 @@ class _ResourceListScreenState<T extends Resource>
                 // Or handle as "no more items"
                 WidgetsBinding.instance.addPostFrameCallback((_) {
                   if (mounted) {
-                    setState(() {
-                      _currentPage =
-                          paginationData.totalPages > 0
-                              ? paginationData.totalPages
-                              : 1;
-                    });
+                    ref.read(currentPageProvider.notifier).state =
+                        paginationData.totalPages > 0
+                            ? paginationData.totalPages
+                            : 1;
                   }
                 });
                 return const Center(
@@ -77,9 +75,8 @@ class _ResourceListScreenState<T extends Resource>
                         currentPage: paginationData.page,
                         totalPages: paginationData.totalPages,
                         onPageChange: (newPage) {
-                          setState(() {
-                            _currentPage = newPage;
-                          });
+                          ref.read(currentPageProvider.notifier).state =
+                              newPage;
                         },
                       ),
                     ),
@@ -94,9 +91,25 @@ class _ResourceListScreenState<T extends Resource>
                               vertical: 4,
                             ),
                             child: ListTile(
-                              title: Text(
-                                '#${_padId(item.id)} - ${item.identifier.replaceAll('-', ' ').split(' ').map((e) => e[0].toUpperCase() + e.substring(1)).join(' ')}', // Basic capitalization
-                                style: const TextStyle(fontFamily: 'monospace'),
+                              title: Row(
+                                children: [
+                                  Text(
+                                    '#${_padId(item.id)} - ',
+                                    style: const TextStyle(
+                                      fontFamily: 'monospace',
+                                    ),
+                                  ),
+                                  TranslationWidget(
+                                    namespace:
+                                        widget.resourceType == "pokemon"
+                                            ? "pokemon_species"
+                                            : widget.resourceType,
+                                    textKey: item.identifier,
+                                    style: const TextStyle(
+                                      fontFamily: 'monospace',
+                                    ),
+                                  ),
+                                ],
                               ),
                               onTap: () {
                                 // Navigate to detail screen (placeholder)
@@ -118,7 +131,8 @@ class _ResourceListScreenState<T extends Resource>
                 ),
               );
             },
-            loading: () => const Center(child: CircularProgressIndicator()),
+            loading:
+                () => const Center(child: CircularProgressIndicator.adaptive()),
             error:
                 (error, stackTrace) => Center(
                   child: Column(
@@ -130,7 +144,7 @@ class _ResourceListScreenState<T extends Resource>
                           // Don't directly call setState. Instead, invalidate to force a refetch.
                           ref.invalidate(
                             resourceListNotifier((
-                              page: _currentPage,
+                              page: currentPage,
                               perPage: _perPage,
                             )),
                           );

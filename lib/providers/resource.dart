@@ -42,3 +42,6 @@ final resourceListProvider = <T extends Resource>({
         );
       });
 };
+
+// 创建一个固定的 provider 来存储当前页面的状态
+final currentPageProvider = StateProvider.autoDispose<int>((ref) => 1);

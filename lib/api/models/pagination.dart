@@ -21,5 +21,14 @@ class PaginationResource<T> {
   factory PaginationResource.fromJson(
     Map<String, dynamic> json,
     T Function(Object? json) fromJsonT,
-  ) => _$PaginationResourceFromJson(json, fromJsonT);
+  ) {
+    // 手动解析，处理可能为 null 的字段
+    return PaginationResource<T>(
+      page: (json['page'] as num?)?.toInt() ?? 1,
+      perPage: (json['per_page'] as num?)?.toInt() ?? 15,
+      totalPages: (json['total_pages'] as num?)?.toInt() ?? 1,
+      totalItems: (json['total_items'] as num?)?.toInt() ?? 0,
+      data: (json['data'] as List<dynamic>?)?.map(fromJsonT).toList() ?? [],
+    );
+  }
 }

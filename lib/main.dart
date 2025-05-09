@@ -1,29 +1,50 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:pokedex/providers/translation.dart';
 import 'package:pokedex/screens/home.dart';
 import 'package:pokedex/screens/settings.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
       title: 'Pokedex Flutter App',
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: const [
+        Locale('en', ''),
+        Locale('zh', 'Hans'),
+        Locale('zh', 'Hant'),
+        Locale('ja', ''),
+        Locale('kr', ''),
+        Locale('es', ''),
+        Locale('fr', ''),
+        Locale('de', ''),
+        Locale('it', ''),
+      ],
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.redAccent),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
       darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.redAccent,
+          seedColor: Colors.blue,
           brightness: Brightness.dark,
         ),
       ),
@@ -33,14 +54,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MainNavigationScreen extends StatefulWidget {
+class MainNavigationScreen extends ConsumerStatefulWidget {
   const MainNavigationScreen({super.key});
 
   @override
-  State<MainNavigationScreen> createState() => _MainNavigationScreenState();
+  ConsumerState<MainNavigationScreen> createState() =>
+      _MainNavigationScreenState();
 }
 
-class _MainNavigationScreenState extends State<MainNavigationScreen> {
+class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
   int _selectedIndex = 0;
 
   static const List<Widget> _screens = <Widget>[HomeScreen(), SettingsScreen()];
@@ -57,9 +79,8 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
                 _selectedIndex = index;
               });
             },
-            labelType: NavigationRailLabelType.selected, // Or .all / .none
+            labelType: NavigationRailLabelType.selected,
             leading: Padding(
-              // Optional: Add a logo or header
               padding: const EdgeInsets.symmetric(vertical: 20.0),
               child: Icon(
                 Icons.catching_pokemon,
@@ -88,7 +109,6 @@ class _MainNavigationScreenState extends State<MainNavigationScreen> {
             elevation: 4,
           ),
           const VerticalDivider(thickness: 1, width: 1),
-          // This is the main content.
           Expanded(child: _screens[_selectedIndex]),
         ],
       ),

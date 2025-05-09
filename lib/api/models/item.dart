@@ -8,7 +8,7 @@ class Item extends Resource {
   final int cost;
 
   @JsonKey(name: 'fling_power')
-  final int flingPower;
+  final int? flingPower;
 
   // 若需启用其他字段可取消注释
   // @JsonKey(name: 'fling_effect')
@@ -18,13 +18,11 @@ class Item extends Resource {
   // final int? naturalGiftPower;
 
   Item({
-    required int id,
-    required String identifier,
+    required super.id,
+    required super.identifier,
     required this.cost,
     required this.flingPower,
-    // this.flingEffect,
-    // this.naturalGiftPower,
-  }) : super(id: id, identifier: identifier);
+  });
 
   factory Item.fromJson(Map<String, dynamic> json) => _$ItemFromJson(json);
   Map<String, dynamic> toJson() => _$ItemToJson(this);

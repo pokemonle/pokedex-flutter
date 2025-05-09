@@ -34,38 +34,35 @@ class HomeScreen extends StatelessWidget {
           _ResourceNavigationCard(
             title: 'Abilities',
             icon: Icons.star_outline,
-            onTap: () => {},
-            //   onTap:
-            //       () => _navigateToResourceList<Ability>(
-            //         context,
-            //         'abilities',
-            //         'Abilities',
-            //         Ability.fromJson,
-            //       ),
+            onTap:
+                () => _navigateToResourceList<Ability>(
+                  context,
+                  'abilities',
+                  'Abilities',
+                  Ability.fromJson,
+                ),
           ),
           _ResourceNavigationCard(
             title: 'Items',
             icon: Icons.backpack_outlined,
-            onTap: () => {},
-            //   onTap:
-            //       () => _navigateToResourceList<Item>(
-            //         context,
-            //         'items',
-            //         'Items',
-            //         Item.fromJson,
-            //       ),
+            onTap:
+                () => _navigateToResourceList<Item>(
+                  context,
+                  'items',
+                  'Items',
+                  Item.fromJson,
+                ),
           ),
           _ResourceNavigationCard(
             title: 'Pokemon', // Example
             icon: Icons.catching_pokemon_outlined,
-            onTap: () => {},
-            //   onTap:
-            //       () => _navigateToResourceList<Pokemon>(
-            //         context,
-            //         'pokemon', // Ensure your API client handles 'pokemon'
-            //         'Pokemon',
-            //         Pokemon.fromJson,
-            //       ),
+            onTap:
+                () => _navigateToResourceList<Pokemon>(
+                  context,
+                  'pokemon', // Ensure your API client handles 'pokemon'
+                  'Pokemon',
+                  Pokemon.fromJson,
+                ),
           ),
           // Add more for Berries, Generations, etc.
           // _ResourceNavigationCard(
