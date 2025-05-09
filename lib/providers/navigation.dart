@@ -27,9 +27,7 @@ class NavigationModeNotifier extends StateNotifier<bool> {
 
   Future<void> setNavigationMode(bool useSideNavigation) async {
     try {
-      if (_prefs == null) {
-        _prefs = await SharedPreferences.getInstance();
-      }
+      _prefs ??= await SharedPreferences.getInstance();
       await _prefs?.setBool(_key, useSideNavigation);
       state = useSideNavigation;
     } catch (e) {

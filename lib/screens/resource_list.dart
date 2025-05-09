@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/models/models.dart';
 import 'package:pokedex/providers/resource.dart';
+import 'package:pokedex/screens/resource.dart';
 import 'package:pokedex/widgets/pagination_controls.dart';
 import 'package:pokedex/widgets/translation.dart';
 
@@ -112,14 +113,20 @@ class _ResourceListScreenState<T extends Resource>
                                 ],
                               ),
                               onTap: () {
-                                // Navigate to detail screen (placeholder)
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(
-                                    content: Text(
-                                      'Tapped on ${item.identifier} (ID: ${item.id})',
-                                    ),
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder:
+                                        (context) => ResourceScreen<T>(
+                                          resourceType: widget.resourceType,
+                                          resourceId: item.id,
+                                          title: widget.title,
+                                          fromJsonFactory:
+                                              widget.fromJsonFactory,
+                                        ),
                                   ),
                                 );
+
                                 // Example: Navigator.push(context, MaterialPageRoute(builder: (context) => ResourceDetailScreen(resource: item)));
                               },
                             ),

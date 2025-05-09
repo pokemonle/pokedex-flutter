@@ -65,27 +65,17 @@ class HomeScreen extends StatelessWidget {
                   Pokemon.fromJson,
                 ),
           ),
-          // Add more for Berries, Generations, etc.
-          // _ResourceNavigationCard(
-          //   title: 'Berries',
-          //   icon: Icons.apple, // Choose appropriate icon
-          //   onTap: () => _navigateToResourceList<Berry>(
-          //     context,
-          //     'berries',
-          //     'Berries',
-          //     Berry.fromJson, // Assuming Berry model and fromJson exist
-          //   ),
-          // ),
-          // _ResourceNavigationCard(
-          //   title: 'Generations',
-          //   icon: Icons.filter_vintage_outlined,
-          //   onTap: () => _navigateToResourceList<Generation>(
-          //     context,
-          //     'generations',
-          //     'Generations',
-          //     Generation.fromJson, // Assuming Generation model and fromJson exist
-          //   ),
-          // ),
+          _ResourceNavigationCard(
+            title: t('default', 'Moves'),
+            icon: Icons.run_circle_outlined,
+            onTap:
+                () => _navigateToResourceList<Move>(
+                  context,
+                  'moves',
+                  'Moves',
+                  Move.fromJson,
+                ),
+          ),
         ],
       ),
     );

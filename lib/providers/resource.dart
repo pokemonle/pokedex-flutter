@@ -3,7 +3,7 @@ import 'package:pokedex/api/client.dart';
 import 'package:pokedex/api/models/models.dart';
 
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
-typedef ResourceFetcher<T> = Future<T> Function(String id);
+typedef ResourceFetcher<T> = Future<T> Function(int id);
 typedef ResourceListFetcher<T> =
     Future<PaginationResource<T>> Function(int page, int perPage);
 
@@ -11,7 +11,7 @@ final resourceProvider = <T extends Resource>({
   required String resource,
   required FromJson<T> fromJson,
 }) {
-  return FutureProvider.autoDispose.family<T, String>((ref, id) async {
+  return FutureProvider.autoDispose.family<T, int>((ref, id) async {
     final client = ApiClient();
     final data = await client.get('$resource/$id');
     return fromJson(data);
