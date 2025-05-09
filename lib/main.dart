@@ -1,6 +1,7 @@
 // lib/main.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokedex/providers/font.dart';
 import 'package:pokedex/widgets/translation.dart';
 import 'package:pokedex/providers/navigation.dart';
 import 'package:pokedex/screens/home.dart';
@@ -39,7 +40,8 @@ class MyApp extends ConsumerWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
-        useMaterial3: true,
+        fontFamily: ref.watch(pixelFontProvider) ? 'fusion' : null,
+        // useMaterial3: true,
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
       darkTheme: ThemeData.dark(useMaterial3: true).copyWith(

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/api/models/models.dart';
+import 'package:pokedex/screens/resource/pokemon.dart';
 import 'package:pokedex/screens/resource_list.dart';
+import 'package:pokedex/screens/resource.dart';
 import 'package:pokedex/widgets/translation.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,6 +13,14 @@ class HomeScreen extends StatelessWidget {
     String resourceType,
     String title,
     T Function(Map<String, dynamic>) fromJsonFactory,
+    Widget Function(
+      BuildContext context,
+      T resource,
+      String resourceType,
+      String title,
+      T Function(Map<String, dynamic> json) fromJsonFactory,
+    )
+    resourceScreenBuilder,
   ) {
     Navigator.push(
       context,
@@ -20,6 +30,7 @@ class HomeScreen extends StatelessWidget {
               resourceType: resourceType,
               title: title,
               fromJsonFactory: fromJsonFactory,
+              resourceScreenBuilder: resourceScreenBuilder,
             ),
       ),
     );
@@ -33,7 +44,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         children: [
           _ResourceNavigationCard(
-            title: t('default', 'Abilities'),
+            title: "Abilities",
             icon: Icons.star_outline,
             onTap:
                 () => _navigateToResourceList<Ability>(
@@ -41,10 +52,17 @@ class HomeScreen extends StatelessWidget {
                   'abilities',
                   'Abilities',
                   Ability.fromJson,
+                  (context, resource, resourceType, title, fromJsonFactory) =>
+                      ResourceScreen<Ability>(
+                        resourceType: resourceType,
+                        resourceId: resource.id,
+                        title: title,
+                        fromJsonFactory: fromJsonFactory,
+                      ),
                 ),
           ),
           _ResourceNavigationCard(
-            title: t('default', 'Items'),
+            title: "Items",
             icon: Icons.backpack_outlined,
             onTap:
                 () => _navigateToResourceList<Item>(
@@ -52,21 +70,35 @@ class HomeScreen extends StatelessWidget {
                   'items',
                   'Items',
                   Item.fromJson,
+                  (context, resource, resourceType, title, fromJsonFactory) =>
+                      ResourceScreen<Item>(
+                        resourceType: resourceType,
+                        resourceId: resource.id,
+                        title: title,
+                        fromJsonFactory: fromJsonFactory,
+                      ),
                 ),
           ),
           _ResourceNavigationCard(
-            title: t('default', 'Pokemon'),
+            title: "Pokemon",
             icon: Icons.catching_pokemon_outlined,
             onTap:
                 () => _navigateToResourceList<Pokemon>(
                   context,
-                  'pokemon', // Ensure your API client handles 'pokemon'
+                  'pokemon',
                   'Pokemon',
                   Pokemon.fromJson,
+                  (context, resource, resourceType, title, fromJsonFactory) =>
+                      PokemonResourceScreen<Pokemon>(
+                        resourceType: resourceType,
+                        resourceId: resource.id,
+                        title: title,
+                        fromJsonFactory: fromJsonFactory,
+                      ),
                 ),
           ),
           _ResourceNavigationCard(
-            title: t('default', 'Moves'),
+            title: "Moves",
             icon: Icons.run_circle_outlined,
             onTap:
                 () => _navigateToResourceList<Move>(
@@ -74,6 +106,13 @@ class HomeScreen extends StatelessWidget {
                   'moves',
                   'Moves',
                   Move.fromJson,
+                  (context, resource, resourceType, title, fromJsonFactory) =>
+                      ResourceScreen<Move>(
+                        resourceType: resourceType,
+                        resourceId: resource.id,
+                        title: title,
+                        fromJsonFactory: fromJsonFactory,
+                      ),
                 ),
           ),
         ],
@@ -107,8 +146,9 @@ class _ResourceNavigationCard extends StatelessWidget {
                   ? Colors.white
                   : Theme.of(context).primaryColor,
         ),
-        title: Text(
-          title,
+        title: TranslationWidget(
+          namespace: 'default',
+          textKey: title,
           style: Theme.of(context).textTheme.titleLarge?.copyWith(
             color:
                 Theme.of(context).brightness == Brightness.dark

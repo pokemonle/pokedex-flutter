@@ -4,8 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/models/models.dart';
 import 'package:pokedex/providers/resource.dart';
-import 'package:pokedex/widgets/pagination_controls.dart';
-import 'package:pokedex/widgets/translation.dart';
 
 class ResourceScreen<T extends Resource> extends ConsumerStatefulWidget {
   final String resourceType;
@@ -40,7 +38,11 @@ class _ResourceScreenState<T extends Resource>
       appBar: AppBar(title: Text(widget.title)),
       body: asyncResource.when(
         data:
-            (data) => Text(JsonEncoder.withIndent("  ").convert(data.toJson())),
+            (data) => Center(
+              child: Text(
+                JsonEncoder.withIndent("  ").convert(data.toJson().toString()),
+              ),
+            ),
         error: (error, stackTrace) => Text('Error: $error'),
         loading:
             () => const Center(child: CircularProgressIndicator.adaptive()),

@@ -94,3 +94,8 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/to/font-from-package
+  fonts:
+    - family: fusion
+      fonts:
+        - asset: fonts/fusion-pixel-12px-monospaced-latin.ttf
+        - asset: fonts/fusion-pixel-12px-proportional.ttc

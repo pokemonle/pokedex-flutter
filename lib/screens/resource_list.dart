@@ -10,12 +10,21 @@ class ResourceListScreen<T extends Resource> extends ConsumerStatefulWidget {
   final String resourceType;
   final String title;
   final T Function(Map<String, dynamic> json) fromJsonFactory;
+  final Widget Function(
+    BuildContext context,
+    T resource,
+    String resourceType,
+    String title,
+    T Function(Map<String, dynamic> json) fromJsonFactory,
+  )
+  resourceScreenBuilder;
 
   const ResourceListScreen({
     super.key,
     required this.resourceType,
     required this.title,
     required this.fromJsonFactory,
+    required this.resourceScreenBuilder,
   });
 
   @override
@@ -43,7 +52,9 @@ class _ResourceListScreenState<T extends Resource>
     );
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.title)),
+      appBar: AppBar(
+        title: TranslationWidget(namespace: "default", textKey: widget.title),
+      ),
       body: Column(
         children: [
           asyncResourceList.when(
@@ -110,6 +121,12 @@ class _ResourceListScreenState<T extends Resource>
                                       fontFamily: 'monospace',
                                     ),
                                   ),
+                                  const Spacer(),
+                                  IconFromUrl(
+                                    resourceId: item.id,
+                                    resourceType: widget.resourceType,
+                                    identifier: item.identifier,
+                                  ),
                                 ],
                               ),
                               onTap: () {
@@ -117,17 +134,16 @@ class _ResourceListScreenState<T extends Resource>
                                   context,
                                   MaterialPageRoute(
                                     builder:
-                                        (context) => ResourceScreen<T>(
-                                          resourceType: widget.resourceType,
-                                          resourceId: item.id,
-                                          title: widget.title,
-                                          fromJsonFactory:
+                                        (context) =>
+                                            widget.resourceScreenBuilder(
+                                              context,
+                                              item,
+                                              widget.resourceType,
+                                              widget.title,
                                               widget.fromJsonFactory,
-                                        ),
+                                            ),
                                   ),
                                 );
-
-                                // Example: Navigator.push(context, MaterialPageRoute(builder: (context) => ResourceDetailScreen(resource: item)));
                               },
                             ),
                           );
@@ -165,5 +181,38 @@ class _ResourceListScreenState<T extends Resource>
         ],
       ),
     );
+  }
+}
+
+// Render Icon from url
+class IconFromUrl extends StatelessWidget {
+  final int resourceId;
+  final String resourceType;
+  final String identifier;
+
+  final String urlBase = "https://image.pokemonle.incubator4.com";
+
+  const IconFromUrl({
+    super.key,
+
+    required this.resourceId,
+    required this.resourceType,
+    required this.identifier,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    switch (resourceType) {
+      case "pokemon":
+        return Image.network(
+          "$urlBase/pokemon/$resourceId.webp",
+          height: 80,
+          width: 80,
+        );
+      case "items":
+        return Image.network("$urlBase/items/$identifier.webp");
+      default:
+        return const SizedBox.shrink();
+    }
   }
 }

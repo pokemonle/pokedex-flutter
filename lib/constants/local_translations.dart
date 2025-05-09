@@ -16,6 +16,7 @@ const Map<String, Map<String, Map<String, String>>> localTranslations = {
       'History': '历史',
       'Use Side Navigation': '使用侧边栏',
       'Use Side Navigation Description': '使用侧边栏代替底部导航栏，默认关闭（Web 默认开启）',
+      'Use Pixel Font': '使用像素字体',
     },
   },
   'zh-Hant': {
@@ -35,6 +36,7 @@ const Map<String, Map<String, Map<String, String>>> localTranslations = {
       'History': '歷史',
       'Use Side Navigation': '使用側邊欄',
       'Use Side Navigation Description': '使用側邊欄代替底部導航欄，默认关闭（Web 默认开启）',
+      'Use Pixel Font': '使用像素字體',
     },
   },
   'en': {
@@ -55,6 +57,7 @@ const Map<String, Map<String, Map<String, String>>> localTranslations = {
       'Use Side Navigation': 'Use Side Navigation',
       'Use Side Navigation Description':
           'Use side navigation bar instead of bottom tabs, default is disabled (Web default is enabled)',
+      'Use Pixel Font': 'Use Pixel Font',
     },
   },
   'ja': {
@@ -75,6 +78,7 @@ const Map<String, Map<String, Map<String, String>>> localTranslations = {
       'Use Side Navigation': '側面ナビゲーションを使用',
       'Use Side Navigation Description':
           '側面ナビゲーションを使用すると、ボトムタブの代わりに側面ナビゲーションバーが表示されます。',
+      'Use Pixel Font': 'ピクセルフォントを使用',
     },
   },
   'kr': {
@@ -94,6 +98,7 @@ const Map<String, Map<String, Map<String, String>>> localTranslations = {
       'History': '기록',
       'Use Side Navigation': '측면 탐색을 사용',
       'Use Side Navigation Description': '측면 탐색을 사용하면 하단 탭 대신 측면 탐색 모음이 표시됩니다.',
+      'Use Pixel Font': '픽셀 폰트 사용',
     },
   },
   'fr': {
@@ -114,6 +119,7 @@ const Map<String, Map<String, Map<String, String>>> localTranslations = {
       'Use Side Navigation': 'Utiliser la navigation latérale',
       'Use Side Navigation Description':
           'Utiliser la navigation latérale au lieu des onglets du bas.',
+      'Use Pixel Font': 'Utiliser la police de caractères pixel',
     },
   },
   'de': {
@@ -134,6 +140,7 @@ const Map<String, Map<String, Map<String, String>>> localTranslations = {
       'Use Side Navigation': 'Seitenleistennavigation verwenden',
       'Use Side Navigation Description':
           'Seitenleistennavigation verwenden,默认关闭（Web 默认开启）',
+      'Use Pixel Font': 'Pixel-Schrifte verwenden',
     },
   },
   'es': {
@@ -154,6 +161,7 @@ const Map<String, Map<String, Map<String, String>>> localTranslations = {
       'Use Side Navigation': 'Usar navegación lateral',
       'Use Side Navigation Description':
           'Usar navegación lateral en lugar de pestañas inferiores.（Web 默认开启）',
+      'Use Pixel Font': 'Usar fuente de píxeles',
     },
   },
   'it': {
@@ -174,6 +182,7 @@ const Map<String, Map<String, Map<String, String>>> localTranslations = {
       'Use Side Navigation': 'Usare la navigazione laterale',
       'Use Side Navigation Description':
           'Usare la navigazione laterale invece delle schede inferiori.',
+      'Use Pixel Font': 'Usare la fonte pixel',
     },
   },
   'cs': {
@@ -194,6 +203,7 @@ const Map<String, Map<String, Map<String, String>>> localTranslations = {
       'Use Side Navigation': 'Použít stránkovou navigaci',
       'Use Side Navigation Description':
           'Použít stránkovou navigaci místo spodní navigace.',
+      'Use Pixel Font': 'Použít pixelovou font',
     },
   },
 };
