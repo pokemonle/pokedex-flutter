@@ -151,28 +151,39 @@ class _ResourceListScreenState<T extends LanguageResource>
                                   final item = paginationData.data[index];
                                   return Card(
                                     clipBehavior: Clip.antiAlias,
-                                    child: InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder:
-                                                (context) => widget
-                                                    .resourceScreenBuilder(
-                                                      context,
-                                                      item,
-                                                      widget.resourceType,
-                                                      widget.title,
-                                                      widget.fromJsonFactory,
-                                                    ),
+                                    child: Ink(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
+                                      ),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          await Future.delayed(
+                                            const Duration(milliseconds: 150),
+                                          );
+                                          if (context.mounted) {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder:
+                                                    (context) => widget
+                                                        .resourceScreenBuilder(
+                                                          context,
+                                                          item,
+                                                          widget.resourceType,
+                                                          widget.title,
+                                                          widget
+                                                              .fromJsonFactory,
+                                                        ),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        child: Center(
+                                          child: IconFromUrl(
+                                            resourceId: item.id,
+                                            resourceType: widget.resourceType,
+                                            identifier: item.identifier,
                                           ),
-                                        );
-                                      },
-                                      child: Center(
-                                        child: IconFromUrl(
-                                          resourceId: item.id,
-                                          resourceType: widget.resourceType,
-                                          identifier: item.identifier,
                                         ),
                                       ),
                                     ),
@@ -188,45 +199,59 @@ class _ResourceListScreenState<T extends LanguageResource>
                                       horizontal: 8,
                                       vertical: 4,
                                     ),
-                                    child: ListTile(
-                                      title: Row(
-                                        children: [
-                                          Text(
-                                            '#${_padId(item.id)} - ',
-                                            style: const TextStyle(
-                                              fontFamily: 'monospace',
-                                            ),
-                                          ),
-                                          Text(
-                                            item.name,
-                                            style: const TextStyle(
-                                              fontFamily: 'monospace',
-                                            ),
-                                          ),
-                                          const Spacer(),
-                                          IconFromUrl(
-                                            resourceId: item.id,
-                                            resourceType: widget.resourceType,
-                                            identifier: item.identifier,
-                                          ),
-                                        ],
+                                    child: Ink(
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(4),
                                       ),
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder:
-                                                (context) => widget
-                                                    .resourceScreenBuilder(
-                                                      context,
-                                                      item,
-                                                      widget.resourceType,
-                                                      widget.title,
-                                                      widget.fromJsonFactory,
-                                                    ),
+                                      child: InkWell(
+                                        onTap: () async {
+                                          await Future.delayed(
+                                            const Duration(milliseconds: 150),
+                                          );
+                                          if (context.mounted) {
+                                            Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder:
+                                                    (context) => widget
+                                                        .resourceScreenBuilder(
+                                                          context,
+                                                          item,
+                                                          widget.resourceType,
+                                                          widget.title,
+                                                          widget
+                                                              .fromJsonFactory,
+                                                        ),
+                                              ),
+                                            );
+                                          }
+                                        },
+                                        child: ListTile(
+                                          title: Row(
+                                            children: [
+                                              Text(
+                                                '#${_padId(item.id)} - ',
+                                                style: const TextStyle(
+                                                  fontFamily: 'monospace',
+                                                ),
+                                              ),
+                                              Text(
+                                                item.name,
+                                                style: const TextStyle(
+                                                  fontFamily: 'monospace',
+                                                ),
+                                              ),
+                                              const Spacer(),
+                                              IconFromUrl(
+                                                resourceId: item.id,
+                                                resourceType:
+                                                    widget.resourceType,
+                                                identifier: item.identifier,
+                                              ),
+                                            ],
                                           ),
-                                        );
-                                      },
+                                        ),
+                                      ),
                                     ),
                                   );
                                 },

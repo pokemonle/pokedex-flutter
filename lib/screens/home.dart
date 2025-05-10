@@ -148,33 +148,48 @@ class _ResourceNavigationCard extends StatelessWidget {
         ),
       ),
       child: Material(
-        type: MaterialType.transparency, // 透明材质保持点击效果
-        child: InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap: onTap,
-          child: Padding(
-            padding: const EdgeInsets.all(16),
-            child: Row(
-              children: [
-                Icon(
-                  icon,
-                  size: 28,
-                  color: colorScheme.primary, // 统一使用 primary 颜色
-                ),
-                const SizedBox(width: 16),
-                Expanded(
-                  child: Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: colorScheme.onSurface, // 使用 onSurface 颜色
+        type: MaterialType.transparency,
+        child: Hero(
+          tag: title,
+          child: Ink(
+            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(12),
+              onTap: () async {
+                final RenderBox renderBox =
+                    context.findRenderObject() as RenderBox;
+                renderBox.markNeedsLayout();
+                await Future.delayed(const Duration(milliseconds: 150));
+                onTap();
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Icon(
+                      icon,
+                      size: 28,
+                      color: colorScheme.primary, // 统一使用 primary 颜色
                     ),
-                  ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: Text(
+                        title,
+                        style: Theme.of(
+                          context,
+                        ).textTheme.titleMedium?.copyWith(
+                          color: colorScheme.onSurface, // 使用 onSurface 颜色
+                        ),
+                      ),
+                    ),
+                    Icon(
+                      Icons.chevron_right,
+                      color:
+                          colorScheme.onSurfaceVariant, // 使用 onSurfaceVariant
+                    ),
+                  ],
                 ),
-                Icon(
-                  Icons.chevron_right,
-                  color: colorScheme.onSurfaceVariant, // 使用 onSurfaceVariant
-                ),
-              ],
+              ),
             ),
           ),
         ),
