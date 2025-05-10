@@ -1,7 +1,3 @@
-// 创建一个 language name provider
-// 从 ApiClient /v1/local-languages 获取数据
-
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/client.dart';
 import 'package:pokedex/api/models/language.dart';

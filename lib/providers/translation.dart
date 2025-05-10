@@ -1,6 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../constants/local_translations.dart';
 
 // 添加一个新的 provider 来专门管理当前语言
 final currentLanguageProvider = StateProvider<int>((ref) => 12); // 12 是简体中文的 ID

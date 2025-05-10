@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/models/models.dart';
 import 'package:pokedex/providers/resource.dart';
-import 'package:pokedex/screens/resource.dart';
 import 'package:pokedex/widgets/pagination_controls.dart';
 
 class ResourceListScreen<T extends LanguageResource>
