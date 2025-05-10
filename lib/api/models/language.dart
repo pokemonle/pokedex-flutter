@@ -28,5 +28,26 @@ class Language extends Resource {
 
   factory Language.fromJson(Map<String, dynamic> json) =>
       _$LanguageFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$LanguageToJson(this);
+}
+
+@JsonSerializable()
+class LanguageName {
+  @JsonKey(name: 'language_id')
+  final int languageId;
+  @JsonKey(name: 'local_language_id')
+  final int localLanguageId;
+
+  final String name;
+
+  LanguageName({
+    required this.languageId,
+    required this.localLanguageId,
+    required this.name,
+  });
+
+  factory LanguageName.fromJson(Map<String, dynamic> json) =>
+      _$LanguageNameFromJson(json);
+  Map<String, dynamic> toJson() => _$LanguageNameToJson(this);
 }

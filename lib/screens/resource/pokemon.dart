@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/models/models.dart';
+import 'package:pokedex/api/models/pokemon_specie.dart';
 import 'package:pokedex/providers/resource.dart';
 import 'package:pokedex/screens/resource.dart';
-import 'package:pokedex/widgets/translation.dart';
 
-class PokemonResourceScreen<T extends Pokemon> extends ResourceScreen<T> {
+class PokemonResourceScreen<T extends PokemonSpecie> extends ResourceScreen<T> {
   const PokemonResourceScreen({
     super.key,
     required super.resourceType,
@@ -21,7 +21,7 @@ class PokemonResourceScreen<T extends Pokemon> extends ResourceScreen<T> {
       PokemonResourceScreenState<T>();
 }
 
-class PokemonResourceScreenState<T extends Pokemon>
+class PokemonResourceScreenState<T extends PokemonSpecie>
     extends ConsumerState<PokemonResourceScreen<T>> {
   late final resourceNotifier = resourceProvider<T>(
     resource: widget.resourceType,
@@ -35,11 +35,7 @@ class PokemonResourceScreenState<T extends Pokemon>
     return Scaffold(
       appBar: AppBar(
         title: asyncResource.when(
-          data:
-              (data) => TranslationWidget(
-                namespace: "pokemon_species",
-                textKey: data.identifier,
-              ),
+          data: (data) => Text(data.name),
           error: (error, stackTrace) => Text('Error: $error'),
           loading:
               () => const Center(child: CircularProgressIndicator.adaptive()),
@@ -62,27 +58,37 @@ class PokemonResourceScreenState<T extends Pokemon>
                     child: Column(
                       children: [
                         InfoRow(label: "Pokédex ID", value: "#${data.id}"),
+                        InfoRow(label: "Species", value: data.name),
+                        InfoRow(label: "Color", value: data.colorId.toString()),
                         InfoRow(
-                          label: "Species ID",
-                          value: "${data.speciesId}",
+                          label: "Forms Switchable",
+                          value: data.formsSwitchable.toString(),
                         ),
                         InfoRow(
-                          label: "Height",
-                          value: "${data.height.toStringAsFixed(1)} m",
+                          label: "Generation",
+                          value: data.generationId.toString(),
                         ),
                         InfoRow(
-                          label: "Weight",
-                          value: "${data.weight.toStringAsFixed(1)} kg",
+                          label: "Growth Rate",
+                          value: data.growthRateId.toString(),
                         ),
                         InfoRow(
-                          label: "Base Experience",
-                          value: "${data.baseExperience} XP",
+                          label: "Has Gender Differences",
+                          value: data.hasGenderDifferences.toString(),
                         ),
-                        InfoRow(label: "Order", value: "#${data.order}"),
                         InfoRow(
-                          label: "Default Form",
-                          value: data.isDefault ? "Yes" : "No",
+                          label: "Hatch Counter",
+                          value: data.hatchCounter.toString(),
                         ),
+                        InfoRow(
+                          label: "Conquest Order",
+                          value: data.conquestOrder.toString(),
+                        ),
+                        InfoRow(
+                          label: "Evolution Chain",
+                          value: data.evolutionChainId.toString(),
+                        ),
+                        InfoRow(label: "Shape", value: data.shapeId.toString()),
                       ],
                     ),
                   ),
@@ -114,9 +120,8 @@ class InfoRow extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Expanded(
-            child: TranslationWidget(
-              namespace: "default",
-              textKey: label,
+            child: Text(
+              label,
               style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),

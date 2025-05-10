@@ -4,7 +4,7 @@ import 'resource.dart';
 part 'move.g.dart';
 
 @JsonSerializable()
-class Move extends Resource {
+class Move extends LanguageResource {
   @JsonKey(name: 'generation_id')
   final int generationId;
 
@@ -36,6 +36,7 @@ class Move extends Resource {
   Move({
     required super.id,
     required super.identifier,
+    required super.name,
     required this.generationId,
     required this.typeId,
     required this.power,
@@ -51,6 +52,5 @@ class Move extends Resource {
   });
 
   factory Move.fromJson(Map<String, dynamic> json) => _$MoveFromJson(json);
-  @override
   Map<String, dynamic> toJson() => _$MoveToJson(this);
 }

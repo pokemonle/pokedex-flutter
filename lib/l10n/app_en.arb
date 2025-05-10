@@ -1,0 +1,83 @@
+{
+  "@@locale": "en",
+  "home": "Home",
+  "@home": {
+    "description": "The home page title"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "The settings page title"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "The language settings title"
+  },
+  "abilities": "Abilities",
+  "@abilities": {
+    "description": "The abilities page title"
+  },
+  "items": "Items",
+  "@items": {
+    "description": "The items page title"
+  },
+  "pokemon": "Pokemon",
+  "@pokemon": {
+    "description": "The pokemon page title"
+  },
+  "stats": "Stats",
+  "@stats": {
+    "description": "The stats page title"
+  },
+  "moves": "Moves",
+  "@moves": {
+    "description": "The moves page title"
+  },
+  "evolution": "Evolution",
+  "@evolution": {
+    "description": "The evolution page title"
+  },
+  "about": "About",
+  "@about": {
+    "description": "The about page title"
+  },
+  "search": "Search",
+  "@search": {
+    "description": "The search page title"
+  },
+  "favorites": "Favorites",
+  "@favorites": {
+    "description": "The favorites page title"
+  },
+  "history": "History",
+  "@history": {
+    "description": "The history page title"
+  },
+  "pokedexId": "Pokédex ID",
+  "@pokedexId": {
+    "description": "The pokédex ID label"
+  },
+  "speciesId": "Species ID",
+  "@speciesId": {
+    "description": "The species ID label"
+  },
+  "height": "Height",
+  "@height": {
+    "description": "The height label"
+  },
+  "weight": "Weight",
+  "@weight": {
+    "description": "The weight label"
+  },
+  "baseExperience": "Base Experience",
+  "@baseExperience": {
+    "description": "The base experience label"
+  },
+  "useSideNavigation": "Use Side Navigation",
+  "@useSideNavigation": {
+    "description": "Use side navigation bar instead of bottom tabs, default is disabled (Web default is enabled)"
+  },
+  "usePixelFont": "Use Pixel Font",
+  "@usePixelFont": {
+    "description": "The pixel font setting title"
+  }
+}

@@ -9,6 +9,7 @@ part of 'item.dart';
 Item _$ItemFromJson(Map<String, dynamic> json) => Item(
   id: (json['id'] as num).toInt(),
   identifier: json['identifier'] as String,
+  name: json['name'] as String,
   cost: (json['cost'] as num).toInt(),
   flingPower: (json['fling_power'] as num?)?.toInt(),
 );
@@ -16,6 +17,7 @@ Item _$ItemFromJson(Map<String, dynamic> json) => Item(
 Map<String, dynamic> _$ItemToJson(Item instance) => <String, dynamic>{
   'id': instance.id,
   'identifier': instance.identifier,
+  'name': instance.name,
   'cost': instance.cost,
   'fling_power': instance.flingPower,
 };

@@ -1,0 +1,91 @@
+{
+  "@@locale": "de",
+  "helloWorld": "Hallo, Welt!",
+  "@helloWorld": {
+    "description": "Der traditionelle Gruß des Programmieranfängers"
+  },
+  "home": "Startseite",
+  "@home": {
+    "description": "The home page title"
+  },
+  "settings": "Einstellungen",
+  "@settings": {
+    "description": "The settings page title"
+  },
+  "language": "Sprache",
+  "@language": {
+    "description": "The language settings title"
+  },
+  "abilities": "Fähigkeiten",
+  "@abilities": {
+    "description": "The abilities page title"
+  },
+  "items": "Items",
+  "@items": {
+    "description": "The items page title"
+  },
+  "pokemon": "Pokémon",
+  "@pokemon": {
+    "description": "The pokemon page title"
+  },
+  "stats": "Statuswerte",
+  "@stats": {
+    "description": "The stats page title"
+  },
+  "moves": "Attacken",
+  "@moves": {
+    "description": "The moves page title"
+  },
+  "evolution": "Entwicklung",
+  "@evolution": {
+    "description": "The evolution page title"
+  },
+  "about": "Über",
+  "@about": {
+    "description": "The about page title"
+  },
+  "search": "Suche",
+  "@search": {
+    "description": "The search page title"
+  },
+  "favorites": "Favoriten",
+  "@favorites": {
+    "description": "The favorites page title"
+  },
+  "history": "Verlauf",
+  "@history": {
+    "description": "The history page title"
+  },
+  "pokedexId": "Pokédex-Nr.",
+  "@pokedexId": {
+    "description": "The pokédex ID label"
+  },
+  "speciesId": "Art-Nr.",
+  "@speciesId": {
+    "description": "The species ID label"
+  },
+  "height": "Größe",
+  "@height": {
+    "description": "The height label"
+  },
+  "weight": "Gewicht",
+  "@weight": {
+    "description": "The weight label"
+  },
+  "baseExperience": "Basis-Erfahrung",
+  "@baseExperience": {
+    "description": "The base experience label"
+  },
+  "useSideNavigation": "Seitenleiste verwenden",
+  "@useSideNavigation": {
+    "description": "The side navigation setting title"
+  },
+  "useSideNavigationDescription": "Seitenleiste statt unterer Navigationsleiste verwenden (standardmäßig aus, standardmäßig an für Web)",
+  "@useSideNavigationDescription": {
+    "description": "The side navigation setting description"
+  },
+  "usePixelFont": "Pixel-Schriftart verwenden",
+  "@usePixelFont": {
+    "description": "The pixel font setting title"
+  }
+}

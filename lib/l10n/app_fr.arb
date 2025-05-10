@@ -1,0 +1,91 @@
+{
+  "@@locale": "fr",
+  "helloWorld": "Bonjour, le monde !",
+  "@helloWorld": {
+    "description": "La salutation traditionnelle du programmeur débutant"
+  },
+  "home": "Accueil",
+  "@home": {
+    "description": "The home page title"
+  },
+  "settings": "Paramètres",
+  "@settings": {
+    "description": "The settings page title"
+  },
+  "language": "Langue",
+  "@language": {
+    "description": "The language settings title"
+  },
+  "abilities": "Capacités",
+  "@abilities": {
+    "description": "The abilities page title"
+  },
+  "items": "Objets",
+  "@items": {
+    "description": "The items page title"
+  },
+  "pokemon": "Pokémon",
+  "@pokemon": {
+    "description": "The pokemon page title"
+  },
+  "stats": "Statistiques",
+  "@stats": {
+    "description": "The stats page title"
+  },
+  "moves": "Capacités",
+  "@moves": {
+    "description": "The moves page title"
+  },
+  "evolution": "Évolution",
+  "@evolution": {
+    "description": "The evolution page title"
+  },
+  "about": "À propos",
+  "@about": {
+    "description": "The about page title"
+  },
+  "search": "Rechercher",
+  "@search": {
+    "description": "The search page title"
+  },
+  "favorites": "Favoris",
+  "@favorites": {
+    "description": "The favorites page title"
+  },
+  "history": "Historique",
+  "@history": {
+    "description": "The history page title"
+  },
+  "pokedexId": "Numéro Pokédex",
+  "@pokedexId": {
+    "description": "The pokédex ID label"
+  },
+  "speciesId": "Numéro d'espèce",
+  "@speciesId": {
+    "description": "The species ID label"
+  },
+  "height": "Taille",
+  "@height": {
+    "description": "The height label"
+  },
+  "weight": "Poids",
+  "@weight": {
+    "description": "The weight label"
+  },
+  "baseExperience": "Expérience de base",
+  "@baseExperience": {
+    "description": "The base experience label"
+  },
+  "useSideNavigation": "Utiliser la navigation latérale",
+  "@useSideNavigation": {
+    "description": "The side navigation setting title"
+  },
+  "useSideNavigationDescription": "Utiliser la barre latérale au lieu de la barre de navigation inférieure (désactivé par défaut, activé par défaut sur le Web)",
+  "@useSideNavigationDescription": {
+    "description": "The side navigation setting description"
+  },
+  "usePixelFont": "Utiliser la police pixel",
+  "@usePixelFont": {
+    "description": "The pixel font setting title"
+  }
+}

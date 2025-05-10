@@ -4,7 +4,7 @@ import 'resource.dart';
 part 'item.g.dart';
 
 @JsonSerializable()
-class Item extends Resource {
+class Item extends LanguageResource {
   final int cost;
 
   @JsonKey(name: 'fling_power')
@@ -20,6 +20,7 @@ class Item extends Resource {
   Item({
     required super.id,
     required super.identifier,
+    required super.name,
     required this.cost,
     required this.flingPower,
   });

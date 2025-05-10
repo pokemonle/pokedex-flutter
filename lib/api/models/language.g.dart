@@ -23,3 +23,16 @@ Map<String, dynamic> _$LanguageToJson(Language instance) => <String, dynamic>{
   'official': instance.official,
   'order': instance.order,
 };
+
+LanguageName _$LanguageNameFromJson(Map<String, dynamic> json) => LanguageName(
+  languageId: (json['language_id'] as num).toInt(),
+  localLanguageId: (json['local_language_id'] as num).toInt(),
+  name: json['name'] as String,
+);
+
+Map<String, dynamic> _$LanguageNameToJson(LanguageName instance) =>
+    <String, dynamic>{
+      'language_id': instance.languageId,
+      'local_language_id': instance.localLanguageId,
+      'name': instance.name,
+    };

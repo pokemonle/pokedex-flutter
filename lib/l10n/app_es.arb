@@ -1,0 +1,83 @@
+{
+  "@@locale": "es",
+  "home": "Inicio",
+  "@home": {
+    "description": "The home page title"
+  },
+  "settings": "Ajustes",
+  "@settings": {
+    "description": "The settings page title"
+  },
+  "language": "Idioma",
+  "@language": {
+    "description": "The language settings title"
+  },
+  "abilities": "Habilidades",
+  "@abilities": {
+    "description": "The abilities page title"
+  },
+  "items": "Objetos",
+  "@items": {
+    "description": "The items page title"
+  },
+  "pokemon": "Pokémon",
+  "@pokemon": {
+    "description": "The pokemon page title"
+  },
+  "stats": "Estadísticas",
+  "@stats": {
+    "description": "The stats page title"
+  },
+  "moves": "Movimientos",
+  "@moves": {
+    "description": "The moves page title"
+  },
+  "evolution": "Evolución",
+  "@evolution": {
+    "description": "The evolution page title"
+  },
+  "about": "Acerca de",
+  "@about": {
+    "description": "The about page title"
+  },
+  "search": "Buscar",
+  "@search": {
+    "description": "The search page title"
+  },
+  "favorites": "Favoritos",
+  "@favorites": {
+    "description": "The favorites page title"
+  },
+  "history": "Historial",
+  "@history": {
+    "description": "The history page title"
+  },
+  "pokedexId": "N.º Pokédex",
+  "@pokedexId": {
+    "description": "The pokédex ID label"
+  },
+  "speciesId": "N.º de especie",
+  "@speciesId": {
+    "description": "The species ID label"
+  },
+  "height": "Altura",
+  "@height": {
+    "description": "The height label"
+  },
+  "weight": "Peso",
+  "@weight": {
+    "description": "The weight label"
+  },
+  "baseExperience": "Experiencia base",
+  "@baseExperience": {
+    "description": "The base experience label"
+  },
+  "useSideNavigation": "Usar navegación lateral",
+  "@useSideNavigation": {
+    "description": "Usar barra lateral en lugar de barra de navegación inferior (desactivado por defecto, activado por defecto en Web)"
+  },
+  "usePixelFont": "Usar fuente pixel",
+  "@usePixelFont": {
+    "description": "The pixel font setting title"
+  }
+}

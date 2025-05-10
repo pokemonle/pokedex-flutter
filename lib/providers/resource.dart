@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/client.dart';
 import 'package:pokedex/api/models/models.dart';
+import 'package:pokedex/providers/translation.dart';
 
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
 typedef ResourceFetcher<T> = Future<T> Function(int id);
@@ -13,7 +14,8 @@ final resourceProvider = <T extends Resource>({
 }) {
   return FutureProvider.autoDispose.family<T, int>((ref, id) async {
     final client = ApiClient();
-    final data = await client.get('$resource/$id');
+    final languageId = ref.watch(currentLanguageProvider);
+    final data = await client.get('languages/$languageId/$resource/$id');
     return fromJson(data);
   });
 };
@@ -28,8 +30,9 @@ final resourceListProvider = <T extends Resource>({
         params,
       ) async {
         final client = ApiClient();
+        final languageId = ref.watch(currentLanguageProvider);
         final data = await client.get(
-          resource,
+          'languages/$languageId/$resource',
           params: {
             'page': params.page.toString(),
             'per_page': params.perPage.toString(),

@@ -1,0 +1,83 @@
+{
+  "@@locale": "it",
+  "home": "Home",
+  "@home": {
+    "description": "The home page title"
+  },
+  "settings": "Impostazioni",
+  "@settings": {
+    "description": "The settings page title"
+  },
+  "language": "Lingua",
+  "@language": {
+    "description": "The language settings title"
+  },
+  "abilities": "Abilità",
+  "@abilities": {
+    "description": "The abilities page title"
+  },
+  "items": "Oggetti",
+  "@items": {
+    "description": "The items page title"
+  },
+  "pokemon": "Pokémon",
+  "@pokemon": {
+    "description": "The pokemon page title"
+  },
+  "stats": "Statistiche",
+  "@stats": {
+    "description": "The stats page title"
+  },
+  "moves": "Mosse",
+  "@moves": {
+    "description": "The moves page title"
+  },
+  "evolution": "Evoluzione",
+  "@evolution": {
+    "description": "The evolution page title"
+  },
+  "about": "Informazioni",
+  "@about": {
+    "description": "The about page title"
+  },
+  "search": "Cerca",
+  "@search": {
+    "description": "The search page title"
+  },
+  "favorites": "Preferiti",
+  "@favorites": {
+    "description": "The favorites page title"
+  },
+  "history": "Cronologia",
+  "@history": {
+    "description": "The history page title"
+  },
+  "pokedexId": "N. Pokédex",
+  "@pokedexId": {
+    "description": "The pokédex ID label"
+  },
+  "speciesId": "N. Specie",
+  "@speciesId": {
+    "description": "The species ID label"
+  },
+  "height": "Altezza",
+  "@height": {
+    "description": "The height label"
+  },
+  "weight": "Peso",
+  "@weight": {
+    "description": "The weight label"
+  },
+  "baseExperience": "Esperienza base",
+  "@baseExperience": {
+    "description": "The base experience label"
+  },
+  "useSideNavigation": "Usa navigazione laterale",
+  "@useSideNavigation": {
+    "description": "Usa barra laterale invece della barra di navigazione inferiore (disattivato di default, attivato di default su Web)"
+  },
+  "usePixelFont": "Usa font pixel",
+  "@usePixelFont": {
+    "description": "The pixel font setting title"
+  }
+}

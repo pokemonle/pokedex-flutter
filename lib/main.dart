@@ -2,11 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/providers/font.dart';
-import 'package:pokedex/widgets/translation.dart';
 import 'package:pokedex/providers/navigation.dart';
+import 'package:pokedex/providers/translation.dart';
 import 'package:pokedex/screens/home.dart';
 import 'package:pokedex/screens/settings.dart';
+import 'package:pokedex/screens/settings/language.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,32 +21,50 @@ class MyApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final currentLanguage = ref.watch(currentLanguageProvider);
+    final locale = languageMap[currentLanguage] ?? const Locale('en');
+
     return MaterialApp(
       title: 'Pokedex Flutter App',
+      locale: locale,
       localizationsDelegates: [
+        AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale('en', ''),
-        Locale('zh', 'Hans'),
-        Locale('zh', 'Hant'),
-        Locale('ja', ''),
-        Locale('kr', ''),
-        Locale('es', ''),
-        Locale('fr', ''),
-        Locale('de', ''),
-        Locale('it', ''),
+        Locale.fromSubtags(languageCode: 'en'),
+        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hans'),
+        Locale.fromSubtags(languageCode: 'zh', scriptCode: 'Hant'),
+        Locale.fromSubtags(languageCode: 'es'),
+        Locale.fromSubtags(languageCode: 'fr'),
+        Locale.fromSubtags(languageCode: 'de'),
+        Locale.fromSubtags(languageCode: 'it'),
+        Locale.fromSubtags(languageCode: 'ja'),
+        Locale.fromSubtags(languageCode: 'ko'),
+        Locale.fromSubtags(languageCode: 'cs'),
       ],
       theme: ThemeData(
+        useMaterial3: true,
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.light,
+          surface: Colors.white,
+          onSurface: Colors.black,
+          surfaceContainer: Colors.grey[100],
+        ),
+        shadowColor: Colors.transparent,
+        cardTheme: const CardTheme(elevation: 0),
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(elevation: 0),
+        ),
+
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
         fontFamily: ref.watch(pixelFontProvider) ? 'fusion' : null,
-        // useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
       ),
-      darkTheme: ThemeData.dark(useMaterial3: true).copyWith(
+      darkTheme: ThemeData.dark().copyWith(
         colorScheme: ColorScheme.fromSeed(
           seedColor: Colors.blue,
           brightness: Brightness.dark,
@@ -109,22 +129,16 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
                   ],
                 ),
               ),
-              destinations: const <NavigationRailDestination>[
+              destinations: <NavigationRailDestination>[
                 NavigationRailDestination(
                   icon: Icon(Icons.home_outlined),
                   selectedIcon: Icon(Icons.home),
-                  label: TranslationWidget(
-                    namespace: 'default',
-                    textKey: 'Home',
-                  ),
+                  label: Text(AppLocalizations.of(context)!.home),
                 ),
                 NavigationRailDestination(
                   icon: Icon(Icons.settings_outlined),
                   selectedIcon: Icon(Icons.settings),
-                  label: TranslationWidget(
-                    namespace: 'default',
-                    textKey: 'Settings',
-                  ),
+                  label: Text(AppLocalizations.of(context)!.settings),
                 ),
               ],
               selectedIconTheme: IconThemeData(
@@ -154,12 +168,12 @@ class _MainNavigationScreenState extends ConsumerState<MainNavigationScreen> {
             BottomNavigationBarItem(
               icon: Icon(Icons.home_outlined),
               activeIcon: Icon(Icons.home),
-              label: t('default', 'Home'),
+              label: AppLocalizations.of(context)!.home,
             ),
             BottomNavigationBarItem(
               icon: Icon(Icons.settings_outlined),
               activeIcon: Icon(Icons.settings),
-              label: t('default', 'Settings'),
+              label: AppLocalizations.of(context)!.settings,
             ),
           ],
           selectedItemColor: Theme.of(context).colorScheme.primary,

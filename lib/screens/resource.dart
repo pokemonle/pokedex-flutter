@@ -5,7 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/models/models.dart';
 import 'package:pokedex/providers/resource.dart';
 
-class ResourceScreen<T extends Resource> extends ConsumerStatefulWidget {
+class ResourceScreen<T extends LanguageResource>
+    extends ConsumerStatefulWidget {
   final String resourceType;
   final int resourceId;
   final String title;
@@ -23,7 +24,7 @@ class ResourceScreen<T extends Resource> extends ConsumerStatefulWidget {
   ConsumerState<ResourceScreen<T>> createState() => _ResourceScreenState<T>();
 }
 
-class _ResourceScreenState<T extends Resource>
+class _ResourceScreenState<T extends LanguageResource>
     extends ConsumerState<ResourceScreen<T>> {
   late final resourceNotifier = resourceProvider<T>(
     resource: widget.resourceType,

@@ -4,7 +4,7 @@ import 'resource.dart';
 part 'ability.g.dart';
 
 @JsonSerializable()
-class Ability extends Resource {
+class Ability extends LanguageResource {
   @JsonKey(name: 'generation_id')
   final int generationId;
 
@@ -14,6 +14,7 @@ class Ability extends Resource {
   Ability({
     required super.id,
     required super.identifier,
+    required super.name,
     required this.generationId,
     required this.isMainSeries,
   });

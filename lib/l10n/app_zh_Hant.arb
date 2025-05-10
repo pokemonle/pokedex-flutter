@@ -1,0 +1,83 @@
+{
+  "@@locale": "zh_Hant",
+  "home": "首頁",
+  "@home": {
+    "description": "The home page title"
+  },
+  "settings": "設定",
+  "@settings": {
+    "description": "The settings page title"
+  },
+  "language": "語言",
+  "@language": {
+    "description": "The language settings title"
+  },
+  "abilities": "特性",
+  "@abilities": {
+    "description": "The abilities page title"
+  },
+  "items": "道具",
+  "@items": {
+    "description": "The items page title"
+  },
+  "pokemon": "寶可夢",
+  "@pokemon": {
+    "description": "The pokemon page title"
+  },
+  "stats": "能力值",
+  "@stats": {
+    "description": "The stats page title"
+  },
+  "moves": "招式",
+  "@moves": {
+    "description": "The moves page title"
+  },
+  "evolution": "進化",
+  "@evolution": {
+    "description": "The evolution page title"
+  },
+  "about": "關於",
+  "@about": {
+    "description": "The about page title"
+  },
+  "search": "搜尋",
+  "@search": {
+    "description": "The search page title"
+  },
+  "favorites": "收藏",
+  "@favorites": {
+    "description": "The favorites page title"
+  },
+  "history": "歷史",
+  "@history": {
+    "description": "The history page title"
+  },
+  "pokedexId": "寶可夢編號",
+  "@pokedexId": {
+    "description": "The pokédex ID label"
+  },
+  "speciesId": "物種編號",
+  "@speciesId": {
+    "description": "The species ID label"
+  },
+  "height": "身高",
+  "@height": {
+    "description": "The height label"
+  },
+  "weight": "體重",
+  "@weight": {
+    "description": "The weight label"
+  },
+  "baseExperience": "基礎經驗",
+  "@baseExperience": {
+    "description": "The base experience label"
+  },
+  "useSideNavigation": "使用側邊欄",
+  "@useSideNavigation": {
+    "description": "使用側邊欄代替底部導航欄，預設關閉（Web 預設開啟）"
+  },
+  "usePixelFont": "使用像素字體",
+  "@usePixelFont": {
+    "description": "The pixel font setting title"
+  }
+}

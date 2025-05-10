@@ -1,0 +1,83 @@
+{
+  "@@locale": "ko",
+  "home": "홈",
+  "@home": {
+    "description": "The home page title"
+  },
+  "settings": "설정",
+  "@settings": {
+    "description": "The settings page title"
+  },
+  "language": "언어",
+  "@language": {
+    "description": "The language settings title"
+  },
+  "abilities": "특성",
+  "@abilities": {
+    "description": "The abilities page title"
+  },
+  "items": "도구",
+  "@items": {
+    "description": "The items page title"
+  },
+  "pokemon": "포켓몬",
+  "@pokemon": {
+    "description": "The pokemon page title"
+  },
+  "stats": "능력치",
+  "@stats": {
+    "description": "The stats page title"
+  },
+  "moves": "기술",
+  "@moves": {
+    "description": "The moves page title"
+  },
+  "evolution": "진화",
+  "@evolution": {
+    "description": "The evolution page title"
+  },
+  "about": "정보",
+  "@about": {
+    "description": "The about page title"
+  },
+  "search": "검색",
+  "@search": {
+    "description": "The search page title"
+  },
+  "favorites": "즐겨찾기",
+  "@favorites": {
+    "description": "The favorites page title"
+  },
+  "history": "기록",
+  "@history": {
+    "description": "The history page title"
+  },
+  "pokedexId": "도감 번호",
+  "@pokedexId": {
+    "description": "The pokédex ID label"
+  },
+  "speciesId": "종족 번호",
+  "@speciesId": {
+    "description": "The species ID label"
+  },
+  "height": "키",
+  "@height": {
+    "description": "The height label"
+  },
+  "weight": "무게",
+  "@weight": {
+    "description": "The weight label"
+  },
+  "baseExperience": "기본 경험치",
+  "@baseExperience": {
+    "description": "The base experience label"
+  },
+  "useSideNavigation": "사이드 네비게이션 사용",
+  "@useSideNavigation": {
+    "description": "하단 네비게이션 바 대신 사이드바 사용 (기본값은 꺼짐, 웹은 기본값으로 켜짐)"
+  },
+  "usePixelFont": "픽셀 폰트 사용",
+  "@usePixelFont": {
+    "description": "The pixel font setting title"
+  }
+}

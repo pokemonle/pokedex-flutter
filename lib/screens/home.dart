@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/api/models/models.dart';
+import 'package:pokedex/api/models/pokemon_specie.dart';
 import 'package:pokedex/screens/resource/pokemon.dart';
 import 'package:pokedex/screens/resource_list.dart';
 import 'package:pokedex/screens/resource.dart';
-import 'package:pokedex/widgets/translation.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  void _navigateToResourceList<T extends Resource>(
+  void _navigateToResourceList<T extends LanguageResource>(
     BuildContext context,
     String resourceType,
     String title,
@@ -44,7 +45,7 @@ class HomeScreen extends StatelessWidget {
         padding: const EdgeInsets.all(16.0),
         children: [
           _ResourceNavigationCard(
-            title: "Abilities",
+            title: AppLocalizations.of(context)!.abilities,
             icon: Icons.star_outline,
             onTap:
                 () => _navigateToResourceList<Ability>(
@@ -62,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                 ),
           ),
           _ResourceNavigationCard(
-            title: "Items",
+            title: AppLocalizations.of(context)!.items,
             icon: Icons.backpack_outlined,
             onTap:
                 () => _navigateToResourceList<Item>(
@@ -80,16 +81,16 @@ class HomeScreen extends StatelessWidget {
                 ),
           ),
           _ResourceNavigationCard(
-            title: "Pokemon",
+            title: AppLocalizations.of(context)!.pokemon,
             icon: Icons.catching_pokemon_outlined,
             onTap:
-                () => _navigateToResourceList<Pokemon>(
+                () => _navigateToResourceList<PokemonSpecie>(
                   context,
-                  'pokemon',
+                  'pokemon_species',
                   'Pokemon',
-                  Pokemon.fromJson,
+                  PokemonSpecie.fromJson,
                   (context, resource, resourceType, title, fromJsonFactory) =>
-                      PokemonResourceScreen<Pokemon>(
+                      PokemonResourceScreen<PokemonSpecie>(
                         resourceType: resourceType,
                         resourceId: resource.id,
                         title: title,
@@ -98,7 +99,7 @@ class HomeScreen extends StatelessWidget {
                 ),
           ),
           _ResourceNavigationCard(
-            title: "Moves",
+            title: AppLocalizations.of(context)!.moves,
             icon: Icons.run_circle_outlined,
             onTap:
                 () => _navigateToResourceList<Move>(
@@ -134,36 +135,49 @@ class _ResourceNavigationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      elevation: 2,
+    final colorScheme = Theme.of(context).colorScheme;
+
+    return Container(
       margin: const EdgeInsets.symmetric(vertical: 8.0),
-      child: ListTile(
-        leading: Icon(
-          icon,
-          size: 30,
-          color:
-              Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white
-                  : Theme.of(context).primaryColor,
+      decoration: BoxDecoration(
+        color: colorScheme.surface, // 使用 surface 颜色
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: colorScheme.outlineVariant, // 使用 outlineVariant 作为边框色
+          width: 1,
         ),
-        title: TranslationWidget(
-          namespace: 'default',
-          textKey: title,
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            color:
-                Theme.of(context).brightness == Brightness.dark
-                    ? Colors.white
-                    : null,
+      ),
+      child: Material(
+        type: MaterialType.transparency, // 透明材质保持点击效果
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap: onTap,
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Row(
+              children: [
+                Icon(
+                  icon,
+                  size: 28,
+                  color: colorScheme.primary, // 统一使用 primary 颜色
+                ),
+                const SizedBox(width: 16),
+                Expanded(
+                  child: Text(
+                    title,
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                      color: colorScheme.onSurface, // 使用 onSurface 颜色
+                    ),
+                  ),
+                ),
+                Icon(
+                  Icons.chevron_right,
+                  color: colorScheme.onSurfaceVariant, // 使用 onSurfaceVariant
+                ),
+              ],
+            ),
           ),
         ),
-        trailing: Icon(
-          Icons.arrow_forward_ios,
-          color:
-              Theme.of(context).brightness == Brightness.dark
-                  ? Colors.white70
-                  : null,
-        ),
-        onTap: onTap,
       ),
     );
   }

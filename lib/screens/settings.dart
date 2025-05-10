@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/providers/font.dart';
-import 'package:pokedex/widgets/translation.dart';
 import '../providers/translation.dart';
 import '../providers/navigation.dart';
+import '../providers/language.dart';
 import 'settings/language.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class SettingsScreen extends ConsumerWidget {
   const SettingsScreen({super.key});
@@ -14,27 +15,21 @@ class SettingsScreen extends ConsumerWidget {
     final currentLanguage = ref.watch(currentLanguageProvider);
     final useSideNavigation = ref.watch(navigationModeProvider);
     final usePixelFont = ref.watch(pixelFontProvider);
+    final languageNames = ref.watch(languageNameMapProvider);
 
     return Scaffold(
-      appBar: AppBar(
-        title: const TranslationWidget(
-          namespace: 'default',
-          textKey: 'Settings',
-        ),
-      ),
+      appBar: AppBar(title: Text(AppLocalizations.of(context)!.settings)),
       body: ListView(
         children: [
           ListTile(
             leading: const Icon(Icons.language),
-            title: const TranslationWidget(
-              namespace: 'default',
-              textKey: 'Language',
-            ),
+            title: Text(AppLocalizations.of(context)!.language),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
-                  _getLanguageName(currentLanguage),
+                  languageNames[currentLanguage.toString()] ??
+                      currentLanguage.toString(),
                   style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                     color: Theme.of(
                       context,
@@ -54,14 +49,8 @@ class SettingsScreen extends ConsumerWidget {
           ),
           SwitchListTile.adaptive(
             secondary: const Icon(Icons.view_sidebar),
-            title: const TranslationWidget(
-              namespace: 'default',
-              textKey: 'Use Side Navigation',
-            ),
-            subtitle: const TranslationWidget(
-              namespace: 'default',
-              textKey: 'Use Side Navigation Description',
-            ),
+            title: Text(AppLocalizations.of(context)!.useSideNavigation),
+
             value: useSideNavigation,
             onChanged: (bool value) {
               ref
@@ -71,10 +60,7 @@ class SettingsScreen extends ConsumerWidget {
           ),
           SwitchListTile.adaptive(
             secondary: const Icon(Icons.view_sidebar),
-            title: const TranslationWidget(
-              namespace: 'default',
-              textKey: 'Use Pixel Font',
-            ),
+            title: Text(AppLocalizations.of(context)!.usePixelFont),
             value: usePixelFont,
             onChanged: (bool value) {
               ref.read(pixelFontProvider.notifier).setPixelFont(value);
@@ -83,21 +69,5 @@ class SettingsScreen extends ConsumerWidget {
         ],
       ),
     );
-  }
-
-  String _getLanguageName(String code) {
-    final languages = {
-      'en': 'English',
-      'zh-Hans': '简体中文',
-      'zh-Hant': '繁體中文',
-      'ja': '日本語',
-      'kr': '한국어',
-      'fr': 'Français',
-      'de': 'Deutsch',
-      'es': 'Español',
-      'it': 'Italiano',
-      'cs': 'Čeština',
-    };
-    return languages[code] ?? code;
   }
 }

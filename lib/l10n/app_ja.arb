@@ -1,0 +1,83 @@
+{
+  "@@locale": "ja",
+  "home": "ホーム",
+  "@home": {
+    "description": "The home page title"
+  },
+  "settings": "設定",
+  "@settings": {
+    "description": "The settings page title"
+  },
+  "language": "言語",
+  "@language": {
+    "description": "The language settings title"
+  },
+  "abilities": "特性",
+  "@abilities": {
+    "description": "The abilities page title"
+  },
+  "items": "道具",
+  "@items": {
+    "description": "The items page title"
+  },
+  "pokemon": "ポケモン",
+  "@pokemon": {
+    "description": "The pokemon page title"
+  },
+  "stats": "能力値",
+  "@stats": {
+    "description": "The stats page title"
+  },
+  "moves": "技",
+  "@moves": {
+    "description": "The moves page title"
+  },
+  "evolution": "進化",
+  "@evolution": {
+    "description": "The evolution page title"
+  },
+  "about": "概要",
+  "@about": {
+    "description": "The about page title"
+  },
+  "search": "検索",
+  "@search": {
+    "description": "The search page title"
+  },
+  "favorites": "お気に入り",
+  "@favorites": {
+    "description": "The favorites page title"
+  },
+  "history": "履歴",
+  "@history": {
+    "description": "The history page title"
+  },
+  "pokedexId": "図鑑番号",
+  "@pokedexId": {
+    "description": "The pokédex ID label"
+  },
+  "speciesId": "種族番号",
+  "@speciesId": {
+    "description": "The species ID label"
+  },
+  "height": "高さ",
+  "@height": {
+    "description": "The height label"
+  },
+  "weight": "重さ",
+  "@weight": {
+    "description": "The weight label"
+  },
+  "baseExperience": "基礎経験値",
+  "@baseExperience": {
+    "description": "The base experience label"
+  },
+  "useSideNavigation": "サイドナビゲーションを使用",
+  "@useSideNavigation": {
+    "description": "下部ナビゲーションバーの代わりにサイドバーを使用（デフォルトはオフ、Webはデフォルトでオン）"
+  },
+  "usePixelFont": "ピクセルフォントを使用",
+  "@usePixelFont": {
+    "description": "The pixel font setting title"
+  }
+}

@@ -1,0 +1,83 @@
+{
+  "@@locale": "cs",
+  "home": "Domů",
+  "@home": {
+    "description": "The home page title"
+  },
+  "settings": "Nastavení",
+  "@settings": {
+    "description": "The settings page title"
+  },
+  "language": "Jazyk",
+  "@language": {
+    "description": "The language settings title"
+  },
+  "abilities": "Schopnosti",
+  "@abilities": {
+    "description": "The abilities page title"
+  },
+  "items": "Předměty",
+  "@items": {
+    "description": "The items page title"
+  },
+  "pokemon": "Pokémon",
+  "@pokemon": {
+    "description": "The pokemon page title"
+  },
+  "stats": "Statistiky",
+  "@stats": {
+    "description": "The stats page title"
+  },
+  "moves": "Útoky",
+  "@moves": {
+    "description": "The moves page title"
+  },
+  "evolution": "Vývoj",
+  "@evolution": {
+    "description": "The evolution page title"
+  },
+  "about": "O aplikaci",
+  "@about": {
+    "description": "The about page title"
+  },
+  "search": "Hledat",
+  "@search": {
+    "description": "The search page title"
+  },
+  "favorites": "Oblíbené",
+  "@favorites": {
+    "description": "The favorites page title"
+  },
+  "history": "Historie",
+  "@history": {
+    "description": "The history page title"
+  },
+  "pokedexId": "Č. Pokédexu",
+  "@pokedexId": {
+    "description": "The pokédex ID label"
+  },
+  "speciesId": "Č. druhu",
+  "@speciesId": {
+    "description": "The species ID label"
+  },
+  "height": "Výška",
+  "@height": {
+    "description": "The height label"
+  },
+  "weight": "Váha",
+  "@weight": {
+    "description": "The weight label"
+  },
+  "baseExperience": "Základní zkušenost",
+  "@baseExperience": {
+    "description": "The base experience label"
+  },
+  "useSideNavigation": "Použít postranní navigaci",
+  "@useSideNavigation": {
+    "description": "Použít postranní panel místo spodní navigační lišty (ve výchozím nastavení vypnuto, ve výchozím nastavení zapnuto pro Web)"
+  },
+  "usePixelFont": "Použít pixelové písmo",
+  "@usePixelFont": {
+    "description": "The pixel font setting title"
+  }
+}

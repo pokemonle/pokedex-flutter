@@ -9,6 +9,7 @@ part of 'move.dart';
 Move _$MoveFromJson(Map<String, dynamic> json) => Move(
   id: (json['id'] as num).toInt(),
   identifier: json['identifier'] as String,
+  name: json['name'] as String,
   generationId: (json['generation_id'] as num).toInt(),
   typeId: (json['type_id'] as num?)?.toInt(),
   power: (json['power'] as num?)?.toInt(),
@@ -26,6 +27,7 @@ Move _$MoveFromJson(Map<String, dynamic> json) => Move(
 Map<String, dynamic> _$MoveToJson(Move instance) => <String, dynamic>{
   'id': instance.id,
   'identifier': instance.identifier,
+  'name': instance.name,
   'generation_id': instance.generationId,
   'type_id': instance.typeId,
   'power': instance.power,
