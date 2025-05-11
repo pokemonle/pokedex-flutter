@@ -79,5 +79,25 @@
   "usePixelFont": "픽셀 폰트 사용",
   "@usePixelFont": {
     "description": "The pixel font setting title"
+  },
+  "generation": "세대",
+  "@generation": {
+    "description": "The generation label"
+  },
+  "growthRate": "성장률",
+  "@growthRate": {
+    "description": "The growth rate label"
+  },
+  "hatchCounter": "알 횟수",
+  "@hatchCounter": {
+    "description": "The hatch counter label"
+  },
+  "conquestOrder": "정복 순서",
+  "@conquestOrder": {
+    "description": "The conquest order label"
+  },
+  "formsSwitchable": "변형 가능",
+  "@formsSwitchable": {
+    "description": "The forms switchable label"
   }
 }

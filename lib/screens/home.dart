@@ -86,7 +86,7 @@ class HomeScreen extends StatelessWidget {
             onTap:
                 () => _navigateToResourceList<PokemonSpecie>(
                   context,
-                  'pokemon_species',
+                  'pokemon-species',
                   'Pokemon',
                   PokemonSpecie.fromJson,
                   (context, resource, resourceType, title, fromJsonFactory) =>

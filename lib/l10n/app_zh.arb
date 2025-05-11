@@ -79,5 +79,25 @@
   "usePixelFont": "使用像素字体",
   "@usePixelFont": {
     "description": "The pixel font setting title"
+  },
+  "generation": "世代",
+  "@generation": {
+    "description": "The generation label"
+  },
+  "growthRate": "成长率",
+  "@growthRate": {
+    "description": "The growth rate label"
+  },
+  "hatchCounter": "孵化步数",
+  "@hatchCounter": {
+    "description": "The hatch counter label"
+  },
+  "conquestOrder": "征服顺序",
+  "@conquestOrder": {
+    "description": "The conquest order label"
+  },
+  "formsSwitchable": "可变形态",
+  "@formsSwitchable": {
+    "description": "The forms switchable label"
   }
 }

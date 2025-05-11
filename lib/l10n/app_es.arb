@@ -79,5 +79,25 @@
   "usePixelFont": "Usar fuente pixel",
   "@usePixelFont": {
     "description": "The pixel font setting title"
+  },
+  "generation": "Generación",
+  "@generation": {
+    "description": "The generation label"
+  },
+  "growthRate": "Tasa de crecimiento",
+  "@growthRate": {
+    "description": "The growth rate label"
+  },
+  "hatchCounter": "Contador de incubación",
+  "@hatchCounter": {
+    "description": "The hatch counter label"
+  },
+  "conquestOrder": "Orden de conquista",
+  "@conquestOrder": {
+    "description": "The conquest order label"
+  },
+  "formsSwitchable": "Formas intercambiables",
+  "@formsSwitchable": {
+    "description": "The forms switchable label"
   }
 }

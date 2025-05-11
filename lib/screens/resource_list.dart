@@ -310,7 +310,7 @@ class IconFromUrl extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     switch (resourceType) {
-      case "pokemon_species":
+      case "pokemon-species":
         return Image.network(
           "$urlBase/pokemon/$resourceId.webp",
           height: 80,

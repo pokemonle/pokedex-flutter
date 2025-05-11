@@ -87,5 +87,25 @@
   "usePixelFont": "Pixel-Schriftart verwenden",
   "@usePixelFont": {
     "description": "The pixel font setting title"
+  },
+  "generation": "Generation",
+  "@generation": {
+    "description": "The generation label"
+  },
+  "growthRate": "Wachstumsrate",
+  "@growthRate": {
+    "description": "The growth rate label"
+  },
+  "hatchCounter": "Hatch Counter",
+  "@hatchCounter": {
+    "description": "The hatch counter label"
+  },
+  "conquestOrder": "Conquest Order",
+  "@conquestOrder": {
+    "description": "The conquest order label"
+  },
+  "formsSwitchable": "Forms Switchable",
+  "@formsSwitchable": {
+    "description": "The forms switchable label"
   }
 }

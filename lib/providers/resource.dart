@@ -15,7 +15,10 @@ final resourceProvider = <T extends Resource>({
   return FutureProvider.autoDispose.family<T, int>((ref, id) async {
     final client = ApiClient();
     final languageId = ref.watch(currentLanguageProvider);
-    final data = await client.get('languages/$languageId/$resource/$id');
+    final data = await client.get(
+      '$resource/$id',
+      params: {"lang": languageId.toString()},
+    );
     return fromJson(data);
   });
 };
@@ -32,10 +35,11 @@ final resourceListProvider = <T extends Resource>({
         final client = ApiClient();
         final languageId = ref.watch(currentLanguageProvider);
         final data = await client.get(
-          'languages/$languageId/$resource',
+          resource,
           params: {
             'page': params.page.toString(),
             'per_page': params.perPage.toString(),
+            'lang': languageId.toString(),
           },
         );
 

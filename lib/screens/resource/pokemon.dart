@@ -1,10 +1,9 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/models/models.dart';
 import 'package:pokedex/providers/resource.dart';
 import 'package:pokedex/screens/resource.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class PokemonResourceScreen<T extends PokemonSpecie> extends ResourceScreen<T> {
   const PokemonResourceScreen({
@@ -56,19 +55,21 @@ class PokemonResourceScreenState<T extends PokemonSpecie>
                     ),
                     child: Column(
                       children: [
-                        InfoRow(label: "Pokédex ID", value: "#${data.id}"),
-                        InfoRow(label: "Species", value: data.name),
+                        InfoRow(
+                          label: AppLocalizations.of(context)!.pokedexId,
+                          value: "#${data.id}",
+                        ),
                         InfoRow(label: "Color", value: data.colorId.toString()),
                         InfoRow(
-                          label: "Forms Switchable",
+                          label: AppLocalizations.of(context)!.formsSwitchable,
                           value: data.formsSwitchable.toString(),
                         ),
                         InfoRow(
-                          label: "Generation",
+                          label: AppLocalizations.of(context)!.generation,
                           value: data.generationId.toString(),
                         ),
                         InfoRow(
-                          label: "Growth Rate",
+                          label: AppLocalizations.of(context)!.growthRate,
                           value: data.growthRateId.toString(),
                         ),
                         InfoRow(
@@ -76,12 +77,16 @@ class PokemonResourceScreenState<T extends PokemonSpecie>
                           value: data.hasGenderDifferences.toString(),
                         ),
                         InfoRow(
-                          label: "Hatch Counter",
+                          label: AppLocalizations.of(context)!.hatchCounter,
                           value: data.hatchCounter.toString(),
                         ),
                         InfoRow(
-                          label: "Conquest Order",
+                          label: AppLocalizations.of(context)!.conquestOrder,
                           value: data.conquestOrder.toString(),
+                        ),
+                        InfoRow(
+                          label: AppLocalizations.of(context)!.formsSwitchable,
+                          value: data.formsSwitchable.toString(),
                         ),
                         InfoRow(
                           label: "Evolution Chain",
