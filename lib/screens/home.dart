@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:pokedex/api/models/models.dart';
 import 'package:pokedex/api/models/pokemon_specie.dart';
+import 'package:pokedex/screens/resource/ability.dart';
 import 'package:pokedex/screens/resource/pokemon.dart';
 import 'package:pokedex/screens/resource_list.dart';
 import 'package:pokedex/screens/resource.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:pokedex/widgets/resource.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -51,10 +53,10 @@ class HomeScreen extends StatelessWidget {
                 () => _navigateToResourceList<Ability>(
                   context,
                   'abilities',
-                  'Abilities',
+                  AppLocalizations.of(context)!.abilities,
                   Ability.fromJson,
                   (context, resource, resourceType, title, fromJsonFactory) =>
-                      ResourceScreen<Ability>(
+                      AbilityResourceScreen(
                         resourceType: resourceType,
                         resourceId: resource.id,
                         title: title,
@@ -69,7 +71,7 @@ class HomeScreen extends StatelessWidget {
                 () => _navigateToResourceList<Item>(
                   context,
                   'items',
-                  'Items',
+                  AppLocalizations.of(context)!.items,
                   Item.fromJson,
                   (context, resource, resourceType, title, fromJsonFactory) =>
                       ResourceScreen<Item>(
@@ -87,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                 () => _navigateToResourceList<PokemonSpecie>(
                   context,
                   'pokemon-species',
-                  'Pokemon',
+                  AppLocalizations.of(context)!.pokemon,
                   PokemonSpecie.fromJson,
                   (context, resource, resourceType, title, fromJsonFactory) =>
                       PokemonResourceScreen<PokemonSpecie>(
@@ -105,7 +107,7 @@ class HomeScreen extends StatelessWidget {
                 () => _navigateToResourceList<Move>(
                   context,
                   'moves',
-                  'Moves',
+                  AppLocalizations.of(context)!.moves,
                   Move.fromJson,
                   (context, resource, resourceType, title, fromJsonFactory) =>
                       ResourceScreen<Move>(
@@ -135,65 +137,13 @@ class _ResourceNavigationCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-
-    return Container(
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      decoration: BoxDecoration(
-        color: colorScheme.surface, // 使用 surface 颜色
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: colorScheme.outlineVariant, // 使用 outlineVariant 作为边框色
-          width: 1,
-        ),
-      ),
-      child: Material(
-        type: MaterialType.transparency,
-        child: Hero(
-          tag: title,
-          child: Ink(
-            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12)),
-            child: InkWell(
-              borderRadius: BorderRadius.circular(12),
-              onTap: () async {
-                final RenderBox renderBox =
-                    context.findRenderObject() as RenderBox;
-                renderBox.markNeedsLayout();
-                await Future.delayed(const Duration(milliseconds: 150));
-                onTap();
-              },
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: Row(
-                  children: [
-                    Icon(
-                      icon,
-                      size: 28,
-                      color: colorScheme.primary, // 统一使用 primary 颜色
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: Text(
-                        title,
-                        style: Theme.of(
-                          context,
-                        ).textTheme.titleMedium?.copyWith(
-                          color: colorScheme.onSurface, // 使用 onSurface 颜色
-                        ),
-                      ),
-                    ),
-                    Icon(
-                      Icons.chevron_right,
-                      color:
-                          colorScheme.onSurfaceVariant, // 使用 onSurfaceVariant
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ),
-        ),
-      ),
+    return ResourceWidget(
+      icon: icon,
+      title: title,
+      onTap: onTap,
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      rightIcon: true,
     );
   }
 }

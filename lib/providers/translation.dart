@@ -40,8 +40,3 @@ final translationProvider = StateNotifierProvider<
 >((ref) {
   return TranslationNotifier(ref);
 });
-
-String useTranslation(WidgetRef ref, String ns, String key) {
-  // 直接返回 key
-  return key;
-}

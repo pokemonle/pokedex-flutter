@@ -4,7 +4,7 @@ import 'resource.dart';
 part 'pokemon.g.dart';
 
 @JsonSerializable()
-class Pokemon extends Resource {
+class Pokemon extends LanguageResource {
   @JsonKey(name: 'species_id')
   final int speciesId;
   final int height;
@@ -18,6 +18,7 @@ class Pokemon extends Resource {
   Pokemon({
     required super.id,
     required super.identifier,
+    required super.name,
     required this.speciesId,
     required this.height,
     required this.weight,

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/models/models.dart';
 import 'package:pokedex/providers/resource.dart';
 import 'package:pokedex/widgets/pagination_controls.dart';
+import 'package:pokedex/widgets/resource_icon.dart';
 
 class ResourceListScreen<T extends LanguageResource>
     extends ConsumerStatefulWidget {
@@ -170,7 +171,7 @@ class _ResourceListScreenState<T extends LanguageResource>
                                                           context,
                                                           item,
                                                           widget.resourceType,
-                                                          widget.title,
+                                                          item.name,
                                                           widget
                                                               .fromJsonFactory,
                                                         ),
@@ -179,7 +180,7 @@ class _ResourceListScreenState<T extends LanguageResource>
                                           }
                                         },
                                         child: Center(
-                                          child: IconFromUrl(
+                                          child: ResourceIcon(
                                             resourceId: item.id,
                                             resourceType: widget.resourceType,
                                             identifier: item.identifier,
@@ -193,64 +194,53 @@ class _ResourceListScreenState<T extends LanguageResource>
                               : ListView.builder(
                                 itemCount: paginationData.data.length,
                                 itemBuilder: (context, index) {
+                                  final colorScheme =
+                                      Theme.of(context).colorScheme;
                                   final item = paginationData.data[index];
-                                  return Card(
+                                  return Container(
                                     margin: const EdgeInsets.symmetric(
-                                      horizontal: 8,
-                                      vertical: 4,
+                                      vertical: 4.0,
+                                      horizontal: 8.0,
                                     ),
-                                    child: Ink(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4),
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(12),
+                                      border: Border.all(
+                                        color:
+                                            colorScheme
+                                                .outlineVariant, // 使用 outlineVariant 作为边框色
+                                        width: 1,
                                       ),
-                                      child: InkWell(
-                                        onTap: () async {
-                                          await Future.delayed(
-                                            const Duration(milliseconds: 150),
+                                    ),
+                                    child: InkWell(
+                                      onTap: () async {
+                                        await Future.delayed(
+                                          const Duration(milliseconds: 150),
+                                        );
+                                        if (context.mounted) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder:
+                                                  (context) => widget
+                                                      .resourceScreenBuilder(
+                                                        context,
+                                                        item,
+                                                        widget.resourceType,
+                                                        item.name,
+                                                        widget.fromJsonFactory,
+                                                      ),
+                                            ),
                                           );
-                                          if (context.mounted) {
-                                            Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                builder:
-                                                    (context) => widget
-                                                        .resourceScreenBuilder(
-                                                          context,
-                                                          item,
-                                                          widget.resourceType,
-                                                          widget.title,
-                                                          widget
-                                                              .fromJsonFactory,
-                                                        ),
-                                              ),
-                                            );
-                                          }
-                                        },
-                                        child: ListTile(
-                                          title: Row(
-                                            children: [
-                                              Text(
-                                                '#${_padId(item.id)} - ',
-                                                style: const TextStyle(
-                                                  fontFamily: 'monospace',
-                                                ),
-                                              ),
-                                              Text(
-                                                item.name,
-                                                style: const TextStyle(
-                                                  fontFamily: 'monospace',
-                                                ),
-                                              ),
-                                              const Spacer(),
-                                              IconFromUrl(
-                                                resourceId: item.id,
-                                                resourceType:
-                                                    widget.resourceType,
-                                                identifier: item.identifier,
-                                              ),
-                                            ],
-                                          ),
+                                        }
+                                      },
+                                      child: ListTile(
+                                        leading: ResourceIcon(
+                                          resourceId: item.id,
+                                          resourceType: widget.resourceType,
+                                          identifier: item.identifier,
                                         ),
+                                        title: Text(item.name),
+                                        subtitle: Text('ID: ${item.id}'),
                                       ),
                                     ),
                                   );
@@ -288,38 +278,5 @@ class _ResourceListScreenState<T extends LanguageResource>
         ],
       ),
     );
-  }
-}
-
-// Render Icon from url
-class IconFromUrl extends StatelessWidget {
-  final int resourceId;
-  final String resourceType;
-  final String identifier;
-
-  final String urlBase = "https://image.pokemonle.incubator4.com";
-
-  const IconFromUrl({
-    super.key,
-
-    required this.resourceId,
-    required this.resourceType,
-    required this.identifier,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    switch (resourceType) {
-      case "pokemon-species":
-        return Image.network(
-          "$urlBase/pokemon/$resourceId.webp",
-          height: 80,
-          width: 80,
-        );
-      case "items":
-        return Image.network("$urlBase/items/$identifier.webp");
-      default:
-        return const SizedBox.shrink();
-    }
   }
 }

@@ -52,3 +52,19 @@ final resourceListProvider = <T extends Resource>({
 
 // 创建一个固定的 provider 来存储当前页面的状态
 final currentPageProvider = StateProvider.autoDispose<int>((ref) => 1);
+
+// 创建一个 provider 来获取特定 ability 相关的 Pokemon 列表
+final abilityPokemonsProvider = FutureProvider.autoDispose
+    .family<PaginationResource<Pokemon>, int>((ref, abilityId) async {
+      final client = ApiClient();
+      final languageId = ref.watch(currentLanguageProvider);
+      final data = await client.get(
+        'abilities/$abilityId/pokemons',
+        params: {"lang": languageId.toString()},
+      );
+
+      return PaginationResource<Pokemon>.fromJson(
+        data,
+        (json) => Pokemon.fromJson(json as Map<String, dynamic>),
+      );
+    });
