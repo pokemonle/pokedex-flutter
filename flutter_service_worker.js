@@ -3,13 +3,14 @@ const MANIFEST = 'flutter-app-manifest';
 const TEMP = 'flutter-temp-cache';
 const CACHE_NAME = 'flutter-app-cache';
 
-const RESOURCES = {"assets/AssetManifest.json": "9a2571bce4369048011a7b1f6d4549cb",
-"assets/AssetManifest.bin": "f2931ae506bf4184fa374691a5a9f5fd",
+const RESOURCES = {"assets/AssetManifest.json": "420fe783d852c5693fb33b485b3f3df1",
+"assets/AssetManifest.bin": "8a095d8b42e8e3b4dea455ef6305ff96",
+"assets/assets/pokemon_placeholder.png": "8c5b1e50d13997a43038fc86a0d679c2",
 "assets/FontManifest.json": "46f0be28cc8f47fc68d341b8abe16b91",
 "assets/fonts/fusion-pixel-12px-proportional.ttc": "73ad80d8c7e73a6322a5adf9e32625ab",
 "assets/fonts/fusion-pixel-12px-monospaced-latin.ttf": "9e42d6c5aa1bdc85f0916e42bb362f71",
 "assets/fonts/MaterialIcons-Regular.otf": "e2a0cd51dddb4dfe1dfa1877995c6fff",
-"assets/AssetManifest.bin.json": "a82ae9a928ae56f418d6b0bac66731aa",
+"assets/AssetManifest.bin.json": "67fc448c63ed347266b8f4f73dfaa568",
 "assets/shaders/ink_sparkle.frag": "ecc85a2e95f5e9f53123dcaf8cb9b6ce",
 "assets/NOTICES": "1969fe421ce70a91feb4d8ba3aab4e84",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "33b7d9392238c04c131b6ce224e13711",
@@ -30,13 +31,13 @@ const RESOURCES = {"assets/AssetManifest.json": "9a2571bce4369048011a7b1f6d4549c
 "canvaskit/skwasm_st.js.symbols": "c7e7aac7cd8b612defd62b43e3050bdd",
 "index.html": "e652ed85e581deb863489fd82a2dea15",
 "/": "e652ed85e581deb863489fd82a2dea15",
-"flutter_bootstrap.js": "3f63167bf496ab6388c756eb578e659d",
+"flutter_bootstrap.js": "3debfc56481817725d327ce5427e02ac",
 "icons/Icon-192.png": "b5fd7126678221c063e9f65f18c29d34",
 "icons/Icon-maskable-192.png": "b5fd7126678221c063e9f65f18c29d34",
 "icons/Icon-maskable-512.png": "7e02085dfe60e8a82f5987a9af1daee4",
 "icons/Icon-512.png": "7e02085dfe60e8a82f5987a9af1daee4",
 "favicon.png": "3b1846502ed312133e0dde910ed096d0",
-"main.dart.js": "8dcce6c8f85374736546b14952e1062b"};
+"main.dart.js": "03978f3aa9241ef5f21451511a70548e"};
 // The application shell files that are downloaded before a service worker can
 // start.
 const CORE = ["main.dart.js",
