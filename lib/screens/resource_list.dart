@@ -1,23 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/models/models.dart';
+import 'package:pokedex/providers/navigation.dart';
 import 'package:pokedex/providers/resource.dart';
 import 'package:pokedex/widgets/pagination_controls.dart';
+import 'package:pokedex/widgets/resource.dart';
 import 'package:pokedex/widgets/resource_icon.dart';
+import 'dart:async';
 
 class ResourceListScreen<T extends LanguageResource>
     extends ConsumerStatefulWidget {
   final String resourceType;
   final String title;
   final T Function(Map<String, dynamic> json) fromJsonFactory;
-  final Widget Function(
-    BuildContext context,
-    T resource,
-    String resourceType,
-    String title,
-    T Function(Map<String, dynamic> json) fromJsonFactory,
-  )
-  resourceScreenBuilder;
+  final ResourceScreenBuilder<T> resourceScreenBuilder;
 
   const ResourceListScreen({
     super.key,
@@ -36,10 +32,19 @@ class _ResourceListScreenState<T extends LanguageResource>
     extends ConsumerState<ResourceListScreen<T>> {
   int _perPage = 24;
   bool _isGridView = false; // 默认列表视图
+  Timer? _debounce;
+  final TextEditingController _searchController = TextEditingController();
   late final resourceListNotifier = resourceListProvider<T>(
     resource: widget.resourceType,
     fromJson: widget.fromJsonFactory,
   );
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    _debounce?.cancel();
+    super.dispose();
+  }
 
   String _padId(int id) {
     return id.toString().padLeft(4, '0');
@@ -63,6 +68,15 @@ class _ResourceListScreenState<T extends LanguageResource>
     }
   }
 
+  void _onSearchChanged(String query) {
+    if (_debounce?.isActive ?? false) _debounce!.cancel();
+    _debounce = Timer(const Duration(milliseconds: 500), () {
+      ref.read(searchQueryProvider.notifier).state = query;
+      // 重置到第一页
+      ref.read(currentPageProvider.notifier).state = 1;
+    });
+  }
+
   // 计算网格列数
   int _calculateGridCrossAxisCount(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
@@ -75,8 +89,13 @@ class _ResourceListScreenState<T extends LanguageResource>
   @override
   Widget build(BuildContext context) {
     final currentPage = ref.watch(currentPageProvider);
+    final searchQuery = ref.watch(searchQueryProvider);
     final asyncResourceList = ref.watch(
-      resourceListNotifier((page: currentPage, perPage: _perPage)),
+      resourceListNotifier((
+        page: currentPage,
+        perPage: _perPage,
+        query: searchQuery,
+      )),
     );
 
     // 检查是否支持网格视图
@@ -97,6 +116,30 @@ class _ResourceListScreenState<T extends LanguageResource>
       ),
       body: Column(
         children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                hintText: '搜索...',
+                prefixIcon: const Icon(Icons.search),
+                suffixIcon:
+                    _searchController.text.isNotEmpty
+                        ? IconButton(
+                          icon: const Icon(Icons.clear),
+                          onPressed: () {
+                            _searchController.clear();
+                            _onSearchChanged('');
+                          },
+                        )
+                        : null,
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              onChanged: _onSearchChanged,
+            ),
+          ),
           asyncResourceList.when(
             data: (paginationData) {
               if (paginationData.data.isEmpty && paginationData.page > 1) {
@@ -169,8 +212,8 @@ class _ResourceListScreenState<T extends LanguageResource>
                                                     (context) => widget
                                                         .resourceScreenBuilder(
                                                           context,
-                                                          item,
                                                           widget.resourceType,
+                                                          item.id,
                                                           item.name,
                                                           widget
                                                               .fromJsonFactory,
@@ -197,26 +240,17 @@ class _ResourceListScreenState<T extends LanguageResource>
                                   final colorScheme =
                                       Theme.of(context).colorScheme;
                                   final item = paginationData.data[index];
-                                  return Container(
-                                    margin: const EdgeInsets.symmetric(
-                                      vertical: 4.0,
-                                      horizontal: 8.0,
+
+                                  return ResourceWidget(
+                                    icon: ResourceIcon(
+                                      resourceId: item.id,
+                                      resourceType: widget.resourceType,
+                                      identifier: item.identifier,
                                     ),
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(12),
-                                      border: Border.all(
-                                        color:
-                                            colorScheme
-                                                .outlineVariant, // 使用 outlineVariant 作为边框色
-                                        width: 1,
-                                      ),
-                                    ),
-                                    child: InkWell(
-                                      onTap: () async {
-                                        await Future.delayed(
-                                          const Duration(milliseconds: 150),
-                                        );
-                                        if (context.mounted) {
+                                    title: item.name,
+                                    subtitle: 'ID: ${item.id}',
+                                    onTap:
+                                        () => {
                                           Navigator.push(
                                             context,
                                             MaterialPageRoute(
@@ -224,25 +258,14 @@ class _ResourceListScreenState<T extends LanguageResource>
                                                   (context) => widget
                                                       .resourceScreenBuilder(
                                                         context,
-                                                        item,
                                                         widget.resourceType,
+                                                        item.id,
                                                         item.name,
                                                         widget.fromJsonFactory,
                                                       ),
                                             ),
-                                          );
-                                        }
-                                      },
-                                      child: ListTile(
-                                        leading: ResourceIcon(
-                                          resourceId: item.id,
-                                          resourceType: widget.resourceType,
-                                          identifier: item.identifier,
-                                        ),
-                                        title: Text(item.name),
-                                        subtitle: Text('ID: ${item.id}'),
-                                      ),
-                                    ),
+                                          ),
+                                        },
                                   );
                                 },
                               ),
@@ -266,6 +289,7 @@ class _ResourceListScreenState<T extends LanguageResource>
                             resourceListNotifier((
                               page: currentPage,
                               perPage: _perPage,
+                              query: searchQuery,
                             )),
                           );
                         },

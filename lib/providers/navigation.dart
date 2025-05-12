@@ -1,5 +1,9 @@
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pokedex/api/models/resource.dart';
+import 'package:pokedex/screens/resource.dart';
+import 'package:pokedex/screens/resource_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 final navigationModeProvider =
@@ -35,4 +39,58 @@ class NavigationModeNotifier extends StateNotifier<bool> {
       state = useSideNavigation;
     }
   }
+}
+
+typedef ResourceScreenBuilder<T extends LanguageResource> =
+    Widget Function(
+      BuildContext context,
+      String resourceType,
+      int resourceId,
+      String title,
+      T Function(Map<String, dynamic> json) fromJsonFactory,
+    );
+
+void navigateToResource<T extends LanguageResource>(
+  BuildContext context,
+  String resourceType,
+  int resourceId,
+  String title,
+  T Function(Map<String, dynamic>) fromJsonFactory,
+  ResourceScreenBuilder<T> resourceScreenBuilder,
+) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder:
+          (context) => resourceScreenBuilder(
+            context,
+
+            resourceType,
+            resourceId,
+            title,
+            fromJsonFactory,
+          ),
+    ),
+  );
+}
+
+void navigateToResourceList<T extends LanguageResource>(
+  BuildContext context,
+  String resourceType,
+  String title,
+  T Function(Map<String, dynamic>) fromJsonFactory,
+  ResourceScreenBuilder<T> resourceScreenBuilder,
+) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder:
+          (context) => ResourceListScreen<T>(
+            resourceType: resourceType,
+            title: title,
+            fromJsonFactory: fromJsonFactory,
+            resourceScreenBuilder: resourceScreenBuilder,
+          ),
+    ),
+  );
 }

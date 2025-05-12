@@ -19,7 +19,10 @@ class ResourceIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     switch (resourceType) {
       case "pokemon-species":
-        return Image.network("$urlBase/pokemon/$resourceId.webp");
+        return FadeInImage(
+          placeholder: AssetImage("assets/pokemon_placeholder.png"),
+          image: NetworkImage("$urlBase/pokemon/$resourceId.webp"),
+        );
       case "items":
         return Image.network("$urlBase/items/$identifier.webp");
       default:

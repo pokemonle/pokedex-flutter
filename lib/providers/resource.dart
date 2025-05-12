@@ -28,20 +28,23 @@ final resourceListProvider = <T extends Resource>({
   required FromJson<T> fromJson,
 }) {
   return FutureProvider.autoDispose
-      .family<PaginationResource<T>, ({int page, int perPage})>((
+      .family<PaginationResource<T>, ({int page, int perPage, String? query})>((
         ref,
         params,
       ) async {
         final client = ApiClient();
         final languageId = ref.watch(currentLanguageProvider);
-        final data = await client.get(
-          resource,
-          params: {
-            'page': params.page.toString(),
-            'per_page': params.perPage.toString(),
-            'lang': languageId.toString(),
-          },
-        );
+        final queryParams = {
+          'page': params.page.toString(),
+          'per_page': params.perPage.toString(),
+          'lang': languageId.toString(),
+        };
+
+        if (params.query != null && params.query!.isNotEmpty) {
+          queryParams['q'] = params.query!;
+        }
+
+        final data = await client.get(resource, params: queryParams);
 
         return PaginationResource<T>.fromJson(
           data,
@@ -68,3 +71,6 @@ final abilityPokemonsProvider = FutureProvider.autoDispose
         (json) => Pokemon.fromJson(json as Map<String, dynamic>),
       );
     });
+
+// 创建一个 provider 来存储搜索查询
+final searchQueryProvider = StateProvider.autoDispose<String>((ref) => '');

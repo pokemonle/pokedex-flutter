@@ -44,9 +44,19 @@ class PokemonResourceScreenState<T extends PokemonSpecie>
             (data) => Center(
               child: Column(
                 children: [
-                  Image.network(
-                    "https://image.pokemonle.incubator4.com/pokemon/${data.id}.webp",
-                    scale: 0.4,
+                  Expanded(
+                    child: Transform.scale(
+                      scale: 1,
+                      child: FadeInImage(
+                        placeholder: AssetImage(
+                          "assets/pokemon_placeholder.png",
+                        ),
+                        image: NetworkImage(
+                          "https://image.pokemonle.incubator4.com/pokemon/${data.id}.webp",
+                        ),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                   Container(
                     padding: const EdgeInsets.all(16),
