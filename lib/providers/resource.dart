@@ -74,3 +74,18 @@ final abilityPokemonsProvider = FutureProvider.autoDispose
 
 // 创建一个 provider 来存储搜索查询
 final searchQueryProvider = StateProvider.autoDispose<String>((ref) => '');
+
+final pokemonAbilitiesProvider = FutureProvider.autoDispose
+    .family<PaginationResource<AbilityWithSlot>, int>((ref, pokemonId) async {
+      final client = ApiClient();
+      final languageId = ref.watch(currentLanguageProvider);
+      final data = await client.get(
+        'pokemon/$pokemonId/abilities',
+        params: {"lang": languageId.toString()},
+      );
+
+      return PaginationResource<AbilityWithSlot>.fromJson(
+        data,
+        (json) => AbilityWithSlot.fromJson(json as Map<String, dynamic>),
+      );
+    });

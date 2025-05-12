@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/models/resource.dart';
-import 'package:pokedex/screens/resource.dart';
 import 'package:pokedex/screens/resource_list.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

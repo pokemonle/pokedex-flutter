@@ -16,6 +16,10 @@
   "@language": {
     "description": "The language settings title"
   },
+  "basicInfo": "Informations de base",
+  "@basicInfo": {
+    "description": "The basic info page title"
+  },
   "abilities": "Capacités",
   "@abilities": {
     "description": "The abilities page title"

@@ -21,5 +21,28 @@ class Ability extends LanguageResource {
 
   factory Ability.fromJson(Map<String, dynamic> json) =>
       _$AbilityFromJson(json);
+  @override
   Map<String, dynamic> toJson() => _$AbilityToJson(this);
+}
+
+@JsonSerializable()
+class AbilityWithSlot extends Ability {
+  final int slot;
+  @JsonKey(name: 'is_hidden')
+  final bool isHidden;
+
+  AbilityWithSlot({
+    required super.id,
+    required super.identifier,
+    required super.name,
+    required super.generationId,
+    required super.isMainSeries,
+    required this.slot,
+    required this.isHidden,
+  });
+
+  factory AbilityWithSlot.fromJson(Map<String, dynamic> json) =>
+      _$AbilityWithSlotFromJson(json);
+  @override
+  Map<String, dynamic> toJson() => _$AbilityWithSlotToJson(this);
 }

@@ -237,8 +237,6 @@ class _ResourceListScreenState<T extends LanguageResource>
                               : ListView.builder(
                                 itemCount: paginationData.data.length,
                                 itemBuilder: (context, index) {
-                                  final colorScheme =
-                                      Theme.of(context).colorScheme;
                                   final item = paginationData.data[index];
 
                                   return ResourceWidget(

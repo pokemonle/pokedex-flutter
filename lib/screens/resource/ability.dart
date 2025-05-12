@@ -7,7 +7,6 @@ import 'package:pokedex/screens/resource.dart';
 import 'package:pokedex/screens/resource/pokemon.dart';
 import 'package:pokedex/widgets/resource.dart';
 import 'package:pokedex/widgets/resource_icon.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class AbilityResourceScreen extends ResourceScreen<Ability> {
   const AbilityResourceScreen({
