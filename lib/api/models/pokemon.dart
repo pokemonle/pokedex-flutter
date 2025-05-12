@@ -11,7 +11,7 @@ class Pokemon extends LanguageResource {
   final int weight;
   @JsonKey(name: 'base_experience')
   final int baseExperience;
-  final int order;
+  final int? order;
   @JsonKey(name: 'is_default')
   final bool isDefault;
 

@@ -14,7 +14,7 @@ Pokemon _$PokemonFromJson(Map<String, dynamic> json) => Pokemon(
   height: (json['height'] as num).toInt(),
   weight: (json['weight'] as num).toInt(),
   baseExperience: (json['base_experience'] as num).toInt(),
-  order: (json['order'] as num).toInt(),
+  order: (json['order'] as num?)?.toInt(),
   isDefault: json['is_default'] as bool,
 );
 
