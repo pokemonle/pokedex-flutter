@@ -41,79 +41,77 @@ class ResourceWidget extends StatelessWidget {
         ),
       ),
       child: Material(
-        color: Colors.transparent,
-        child: InkWell(
-          borderRadius: BorderRadius.circular(12),
-          onTap:
-              onTap == null
-                  ? null
-                  : () async {
-                    await Future.delayed(Duration(milliseconds: tapDelay));
-                    if (onTap != null) onTap!();
-                  },
-          child: Padding(
-            padding: padding ?? const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                if (icon != null && !rightIcon) ...[
-                  icon!,
-                  const SizedBox(width: 16),
-                ],
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        title,
-                        style: TextStyle(
-                          fontWeight:
-                              isSelected ? FontWeight.bold : FontWeight.normal,
-                          color: isSelected ? colorScheme.primary : null,
-                        ),
-                      ),
-                      if (subtitle != null) ...[
-                        const SizedBox(height: 4),
-                        Text(
-                          subtitle!,
-                          style: Theme.of(
-                            context,
-                          ).textTheme.bodySmall?.copyWith(
-                            color: isSelected ? colorScheme.primary : null,
+        type: MaterialType.transparency,
+        child: Ink(
+          child: InkWell(
+            onTap: () async {
+              await Future.delayed(Duration(milliseconds: tapDelay));
+              onTap?.call();
+            },
+            child: Padding(
+              padding: padding ?? const EdgeInsets.all(2),
+              child: Stack(
+                children: [
+                  if (watermark != null)
+                    Positioned.fill(
+                      child: Center(
+                        child: Transform.rotate(
+                          angle: -0.3, // 稍微倾斜一点
+                          child: Text(
+                            watermark!,
+                            style: TextStyle(
+                              color:
+                                  isSelected
+                                      ? colorScheme.primary.withOpacity(0.2)
+                                      : colorScheme.primaryContainer,
+                              fontSize: 40,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
                         ),
-                      ],
-                    ],
-                  ),
-                ),
-                if (watermark != null)
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 2,
-                    ),
-                    decoration: BoxDecoration(
-                      color:
-                          isSelected
-                              ? colorScheme.primary
-                              : colorScheme.surfaceVariant,
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: Text(
-                      watermark!,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color:
-                            isSelected
-                                ? colorScheme.onPrimary
-                                : colorScheme.onSurfaceVariant,
                       ),
                     ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ListTile(
+                          title: Text(
+                            title,
+                            style: TextStyle(
+                              fontWeight:
+                                  isSelected
+                                      ? FontWeight.bold
+                                      : FontWeight.normal,
+                              color: isSelected ? colorScheme.primary : null,
+                            ),
+                          ),
+                          subtitle:
+                              subtitle != null
+                                  ? Text(
+                                    subtitle!,
+                                    style: TextStyle(
+                                      color:
+                                          isSelected
+                                              ? colorScheme.primary
+                                              : null,
+                                    ),
+                                  )
+                                  : null,
+                          leading: icon,
+                        ),
+                      ),
+                      if (rightIcon)
+                        Icon(
+                          Icons.chevron_right,
+                          color:
+                              isSelected
+                                  ? colorScheme.primary
+                                  : colorScheme.onSurfaceVariant,
+                        ),
+                    ],
                   ),
-                if (icon != null && rightIcon) ...[
-                  const SizedBox(width: 16),
-                  icon!,
                 ],
-              ],
+              ),
             ),
           ),
         ),

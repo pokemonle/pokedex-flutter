@@ -271,7 +271,6 @@ class _EvolutionTabState extends ConsumerState<EvolutionTab> {
                       resourceType: 'pokemon-species',
                       identifier: e.name,
                     ),
-                    watermark: isCurrentPokemon ? '当前' : null,
                     isSelected: isCurrentPokemon,
                     onTap:
                         () => navigateToResource<PokemonSpecie>(
