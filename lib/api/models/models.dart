@@ -1,7 +1,8 @@
 export 'ability.dart';
-export 'pokemon.dart';
-export 'resource.dart';
-export 'pagination.dart';
-export 'item.dart';
+export 'flavor_text.dart';
+export 'language.dart';
 export 'move.dart';
+export 'pokemon.dart';
 export 'pokemon_specie.dart';
+export 'resource.dart';
+export 'item.dart';

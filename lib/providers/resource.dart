@@ -1,6 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/client.dart';
 import 'package:pokedex/api/models/models.dart';
+import 'package:pokedex/api/models/pagination.dart';
 import 'package:pokedex/providers/translation.dart';
 
 typedef FromJson<T> = T Function(Map<String, dynamic> json);
@@ -89,3 +90,15 @@ final pokemonAbilitiesProvider = FutureProvider.autoDispose
         (json) => AbilityWithSlot.fromJson(json as Map<String, dynamic>),
       );
     });
+
+final flavorTextProvider = <T extends Resource>({required String resource}) {
+  return FutureProvider.autoDispose.family<FlavorText, int>((ref, id) async {
+    final client = ApiClient();
+    final languageId = ref.watch(currentLanguageProvider);
+    final data = await client.get(
+      '$resource/$id/flavor-text/latest',
+      params: {"lang": languageId.toString()},
+    );
+    return FlavorText.fromJson(data);
+  });
+};

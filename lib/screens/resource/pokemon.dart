@@ -104,16 +104,36 @@ class PokemonResourceScreenState<T extends PokemonSpecie>
   }
 }
 
-class _BasicInfoTab extends StatelessWidget {
+class _BasicInfoTab extends ConsumerWidget {
   final PokemonSpecie data;
+  final flavorTextNotifier = flavorTextProvider(resource: 'pokemon-species');
 
-  const _BasicInfoTab({required this.data});
+  _BasicInfoTab({required this.data});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final flavorText = ref.watch(flavorTextNotifier(data.id));
+
     return SingleChildScrollView(
       child: Column(
         children: [
+          flavorText.when(
+            data:
+                (text) => Container(
+                  padding: const EdgeInsets.all(16),
+                  child: Card(
+                    child: Padding(
+                      padding: const EdgeInsets.all(16),
+                      child: Text(
+                        text.description,
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
+                    ),
+                  ),
+                ),
+            loading: () => const Center(child: CircularProgressIndicator()),
+            error: (error, stack) => const SizedBox.shrink(),
+          ),
           Container(
             padding: const EdgeInsets.all(16),
             child: Column(
