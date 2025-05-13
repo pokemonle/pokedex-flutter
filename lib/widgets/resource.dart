@@ -10,6 +10,8 @@ class ResourceWidget extends StatelessWidget {
   final String title;
   final String? subtitle;
   final String? watermark;
+  final bool isSelected;
+
   const ResourceWidget({
     super.key,
     this.margin,
@@ -21,6 +23,7 @@ class ResourceWidget extends StatelessWidget {
     required this.title,
     this.subtitle,
     this.watermark,
+    this.isSelected = false,
   });
 
   @override
@@ -30,56 +33,87 @@ class ResourceWidget extends StatelessWidget {
       margin:
           margin ?? const EdgeInsets.symmetric(vertical: 2.0, horizontal: 8.0),
       decoration: BoxDecoration(
-        color: colorScheme.surface,
+        color: isSelected ? colorScheme.primaryContainer : colorScheme.surface,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: colorScheme.outlineVariant, width: 1),
+        border: Border.all(
+          color: isSelected ? colorScheme.primary : colorScheme.outlineVariant,
+          width: isSelected ? 2 : 1,
+        ),
       ),
       child: Material(
-        type: MaterialType.transparency,
-        child: Ink(
-          child: InkWell(
-            onTap: () async {
-              await Future.delayed(Duration(milliseconds: tapDelay));
-              onTap?.call();
-            },
-            child: Padding(
-              padding: padding ?? const EdgeInsets.all(2),
-              child: Stack(
-                children: [
-                  if (watermark != null)
-                    Positioned.fill(
-                      child: Center(
-                        child: Transform.rotate(
-                          angle: -0.3, // 稍微倾斜一点
-                          child: Text(
-                            watermark!,
-                            style: TextStyle(
-                              color: colorScheme.primaryContainer,
-                              fontSize: 40,
-                              fontWeight: FontWeight.bold,
-                            ),
+        color: Colors.transparent,
+        child: InkWell(
+          borderRadius: BorderRadius.circular(12),
+          onTap:
+              onTap == null
+                  ? null
+                  : () async {
+                    await Future.delayed(Duration(milliseconds: tapDelay));
+                    if (onTap != null) onTap!();
+                  },
+          child: Padding(
+            padding: padding ?? const EdgeInsets.all(16.0),
+            child: Row(
+              children: [
+                if (icon != null && !rightIcon) ...[
+                  icon!,
+                  const SizedBox(width: 16),
+                ],
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: TextStyle(
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
+                          color: isSelected ? colorScheme.primary : null,
+                        ),
+                      ),
+                      if (subtitle != null) ...[
+                        const SizedBox(height: 4),
+                        Text(
+                          subtitle!,
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodySmall?.copyWith(
+                            color: isSelected ? colorScheme.primary : null,
                           ),
                         ),
-                      ),
-                    ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ListTile(
-                          title: Text(title),
-                          subtitle: subtitle != null ? Text(subtitle!) : null,
-                          leading: icon,
-                        ),
-                      ),
-                      if (rightIcon)
-                        Icon(
-                          Icons.chevron_right,
-                          color: colorScheme.onSurfaceVariant,
-                        ),
+                      ],
                     ],
                   ),
+                ),
+                if (watermark != null)
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 8,
+                      vertical: 2,
+                    ),
+                    decoration: BoxDecoration(
+                      color:
+                          isSelected
+                              ? colorScheme.primary
+                              : colorScheme.surfaceVariant,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      watermark!,
+                      style: TextStyle(
+                        fontSize: 12,
+                        color:
+                            isSelected
+                                ? colorScheme.onPrimary
+                                : colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ),
+                if (icon != null && rightIcon) ...[
+                  const SizedBox(width: 16),
+                  icon!,
                 ],
-              ),
+              ],
             ),
           ),
         ),

@@ -87,7 +87,7 @@ class PokemonResourceScreenState<T extends PokemonSpecie>
                     children: [
                       _BasicInfoTab(data: data),
                       _AbilitiesTab(data: data),
-                      _EvolutionTab(data: data),
+                      EvolutionTab(data: data),
                     ],
                   ),
                 ),
@@ -241,38 +241,64 @@ class _AbilitiesTab extends ConsumerWidget {
   }
 }
 
-class _EvolutionTab extends StatelessWidget {
+class EvolutionTab extends ConsumerStatefulWidget {
   final PokemonSpecie data;
 
-  const _EvolutionTab({required this.data});
+  const EvolutionTab({super.key, required this.data});
 
   @override
+  ConsumerState<EvolutionTab> createState() => _EvolutionTabState();
+}
+
+class _EvolutionTabState extends ConsumerState<EvolutionTab> {
+  @override
   Widget build(BuildContext context) {
+    final evolutionChainAsync = ref.watch(
+      evolutionChainPokemonSpecieProvider(widget.data.evolutionChainId),
+    );
+
     return ListView(
       padding: const EdgeInsets.all(16),
-      children: const [
-        Card(
-          child: ListTile(
-            leading: CircleAvatar(child: Text('1')),
-            title: Text('进化前形态'),
-            subtitle: Text('进化条件...'),
-          ),
-        ),
-        Card(
-          child: ListTile(
-            leading: CircleAvatar(child: Text('2')),
-            title: Text('当前形态'),
-            subtitle: Text('进化条件...'),
-          ),
-        ),
-        Card(
-          child: ListTile(
-            leading: CircleAvatar(child: Text('3')),
-            title: Text('进化后形态'),
-            subtitle: Text('进化条件...'),
-          ),
-        ),
-      ],
+      children: evolutionChainAsync.when(
+        data:
+            (data) =>
+                data.data.map((e) {
+                  final isCurrentPokemon = e.id == widget.data.id;
+                  return ResourceWidget(
+                    title: e.name,
+                    icon: ResourceIcon(
+                      resourceId: e.id,
+                      resourceType: 'pokemon-species',
+                      identifier: e.name,
+                    ),
+                    watermark: isCurrentPokemon ? '当前' : null,
+                    isSelected: isCurrentPokemon,
+                    onTap:
+                        () => navigateToResource<PokemonSpecie>(
+                          context,
+                          'pokemon-species',
+                          e.id,
+                          e.name,
+                          PokemonSpecie.fromJson,
+                          (
+                            context,
+                            resourceType,
+                            resourceId,
+                            title,
+                            fromJsonFactory,
+                          ) => PokemonResourceScreen(
+                            resourceType: resourceType,
+                            resourceId: resourceId,
+                            title: title,
+                            fromJsonFactory: fromJsonFactory,
+                          ),
+                        ),
+                  );
+                }).toList(),
+        error: (error, stackTrace) => [Text('加载进化链失败: $error')],
+        loading:
+            () => const [Center(child: CircularProgressIndicator.adaptive())],
+      ),
     );
   }
 }

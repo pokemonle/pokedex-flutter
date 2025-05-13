@@ -104,3 +104,17 @@ final flavorTextProvider = <T extends Resource>({required String resource}) {
     return FlavorText.fromJson(data);
   });
 };
+
+final evolutionChainPokemonSpecieProvider = FutureProvider.autoDispose
+    .family<PaginationResource<PokemonSpecie>, int>((ref, id) async {
+      final client = ApiClient();
+      final languageId = ref.watch(currentLanguageProvider);
+      final data = await client.get(
+        'evolution-chains/$id/pokemon-species',
+        params: {"lang": languageId.toString()},
+      );
+      return PaginationResource<PokemonSpecie>.fromJson(
+        data,
+        (json) => PokemonSpecie.fromJson(json as Map<String, dynamic>),
+      );
+    });

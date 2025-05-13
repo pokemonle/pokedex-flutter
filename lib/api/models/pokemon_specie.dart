@@ -8,7 +8,7 @@ class PokemonSpecie extends LanguageResource {
   @JsonKey(name: 'generation_id')
   final int generationId;
   @JsonKey(name: 'evolution_chain_id')
-  final int? evolutionChainId;
+  final int evolutionChainId;
   @JsonKey(name: 'color_id')
   final int colorId;
   @JsonKey(name: 'shape_id')

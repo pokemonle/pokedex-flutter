@@ -12,7 +12,7 @@ PokemonSpecie _$PokemonSpecieFromJson(Map<String, dynamic> json) =>
       identifier: json['identifier'] as String,
       name: json['name'] as String,
       generationId: (json['generation_id'] as num).toInt(),
-      evolutionChainId: (json['evolution_chain_id'] as num?)?.toInt(),
+      evolutionChainId: (json['evolution_chain_id'] as num).toInt(),
       colorId: (json['color_id'] as num).toInt(),
       shapeId: (json['shape_id'] as num).toInt(),
       habitatId: (json['habitat_id'] as num?)?.toInt(),
