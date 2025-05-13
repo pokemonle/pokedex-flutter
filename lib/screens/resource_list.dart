@@ -46,10 +46,6 @@ class _ResourceListScreenState<T extends LanguageResource>
     super.dispose();
   }
 
-  String _padId(int id) {
-    return id.toString().padLeft(4, '0');
-  }
-
   void _handlePerPageChange(int newPerPage) {
     setState(() {
       _perPage = newPerPage;

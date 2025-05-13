@@ -6,6 +6,7 @@ import 'package:pokedex/providers/resource.dart';
 import 'package:pokedex/screens/resource.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:pokedex/widgets/resource.dart';
+import 'package:pokedex/widgets/resource_icon.dart';
 
 class PokemonResourceScreen<T extends PokemonSpecie> extends ResourceScreen<T> {
   const PokemonResourceScreen({
@@ -62,17 +63,13 @@ class PokemonResourceScreenState<T extends PokemonSpecie>
               children: [
                 Container(
                   height: 200,
-                  padding: const EdgeInsets.all(16),
+                  padding: const EdgeInsets.all(4),
                   child: AspectRatio(
                     aspectRatio: 1,
-                    child: FadeInImage(
-                      placeholder: const AssetImage(
-                        "assets/pokemon_placeholder.png",
-                      ),
-                      image: NetworkImage(
-                        "https://image.pokemonle.incubator4.com/pokemon/${data.id}.webp",
-                      ),
-                      fit: BoxFit.contain,
+                    child: ResourceIcon(
+                      resourceId: data.id,
+                      resourceType: 'pokemon-species',
+                      identifier: data.name,
                     ),
                   ),
                 ),

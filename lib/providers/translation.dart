@@ -6,19 +6,10 @@ final currentLanguageProvider = StateProvider<int>((ref) => 12); // 12 是简体
 
 class TranslationNotifier
     extends StateNotifier<Map<String, Map<String, String>>> {
-  SharedPreferences? _prefs;
   final Ref ref;
 
   TranslationNotifier(this.ref) : super({}) {
-    _initPrefs();
-  }
-
-  Future<void> _initPrefs() async {
-    try {
-      _prefs = await SharedPreferences.getInstance();
-    } catch (e) {
-      print('Failed to initialize SharedPreferences: $e');
-    }
+    // _initPrefs();
   }
 
   int get currentLanguage => ref.read(currentLanguageProvider);
