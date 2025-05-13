@@ -108,8 +108,50 @@
   "@conquestOrder": {
     "description": "The conquest order label"
   },
-  "formsSwitchable": "Forms Switchable",
+  "formsSwitchable": "Formen wechselbar",
   "@formsSwitchable": {
     "description": "The forms switchable label"
+  },
+  "power": "Stärke",
+  "@power": {
+    "description": "The move power label"
+  },
+  "pp": "AP",
+  "@pp": {
+    "description": "The move PP label"
+  },
+  "accuracy": "Genauigkeit",
+  "@accuracy": {
+    "description": "The move accuracy label"
+  },
+  "priority": "Priorität",
+  "@priority": {
+    "description": "The move priority label"
+  },
+  "type": "Typ",
+  "@type": {
+    "description": "The move type label"
+  },
+  "damageClass": "Schadensklasse",
+  "@damageClass": {
+    "description": "The move damage class label"
+  },
+  "damageClassId": "{id, select, physical{Physisch} special{Spezial} status{Status} other{Unbekannt}}",
+  "@damageClassId": {
+    "description": "The move damage class ID label",
+    "placeholders": {
+      "id": {
+        "type": "String",
+        "example": "physical"
+      }
+    }
+  },
+  "target": "Ziel",
+  "@target": {
+    "description": "The move target label"
+  },
+  "effectChance": "Effektchance",
+  "@effectChance": {
+    "description": "The move effect chance label"
   }
 }

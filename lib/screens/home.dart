@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pokedex/api/models/models.dart';
 import 'package:pokedex/providers/navigation.dart';
 import 'package:pokedex/screens/resource/ability.dart';
+import 'package:pokedex/screens/resource/move.dart';
 import 'package:pokedex/screens/resource/pokemon.dart';
 import 'package:pokedex/screens/resource.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -81,7 +82,7 @@ class HomeScreen extends StatelessWidget {
                   AppLocalizations.of(context)!.moves,
                   Move.fromJson,
                   (context, resourceType, resourceId, title, fromJsonFactory) =>
-                      ResourceScreen<Move>(
+                      MoveResourceScreen(
                         resourceType: resourceType,
                         resourceId: resourceId,
                         title: title,

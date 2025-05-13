@@ -111,5 +111,47 @@
   "formsSwitchable": "Formes interchangeables",
   "@formsSwitchable": {
     "description": "The forms switchable label"
+  },
+  "power": "Puissance",
+  "@power": {
+    "description": "The move power label"
+  },
+  "pp": "PP",
+  "@pp": {
+    "description": "The move PP label"
+  },
+  "accuracy": "Précision",
+  "@accuracy": {
+    "description": "The move accuracy label"
+  },
+  "priority": "Priorité",
+  "@priority": {
+    "description": "The move priority label"
+  },
+  "type": "Type",
+  "@type": {
+    "description": "The move type label"
+  },
+  "damageClass": "Classe de dégâts",
+  "@damageClass": {
+    "description": "The move damage class label"
+  },
+  "damageClassId": "{id, select, physical{Physique} special{Spécial} status{Statut} other{Inconnu}}",
+  "@damageClassId": {
+    "description": "The move damage class ID label",
+    "placeholders": {
+      "id": {
+        "type": "String",
+        "example": "physical"
+      }
+    }
+  },
+  "target": "Cible",
+  "@target": {
+    "description": "The move target label"
+  },
+  "effectChance": "Chance d'effet",
+  "@effectChance": {
+    "description": "The move effect chance label"
   }
 }

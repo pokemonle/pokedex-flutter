@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_function_declarations_over_variables
+
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/api/client.dart';
 import 'package:pokedex/api/models/models.dart';

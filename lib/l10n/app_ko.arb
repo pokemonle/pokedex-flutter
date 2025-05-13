@@ -100,8 +100,50 @@
   "@conquestOrder": {
     "description": "The conquest order label"
   },
-  "formsSwitchable": "변형 가능",
+  "formsSwitchable": "폼 전환 가능",
   "@formsSwitchable": {
     "description": "The forms switchable label"
+  },
+  "power": "위력",
+  "@power": {
+    "description": "The move power label"
+  },
+  "pp": "PP",
+  "@pp": {
+    "description": "The move PP label"
+  },
+  "accuracy": "명중률",
+  "@accuracy": {
+    "description": "The move accuracy label"
+  },
+  "priority": "우선도",
+  "@priority": {
+    "description": "The move priority label"
+  },
+  "type": "타입",
+  "@type": {
+    "description": "The move type label"
+  },
+  "damageClass": "데미지 클래스",
+  "@damageClass": {
+    "description": "The move damage class label"
+  },
+  "damageClassId": "{id, select, physical{물리} special{특수} status{변화} other{알 수 없음}}",
+  "@damageClassId": {
+    "description": "The move damage class ID label",
+    "placeholders": {
+      "id": {
+        "type": "String",
+        "example": "physical"
+      }
+    }
+  },
+  "target": "대상",
+  "@target": {
+    "description": "The move target label"
+  },
+  "effectChance": "효과 발동률",
+  "@effectChance": {
+    "description": "The move effect chance label"
   }
 }

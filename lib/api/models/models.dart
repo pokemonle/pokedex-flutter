@@ -6,3 +6,4 @@ export 'pokemon.dart';
 export 'pokemon_specie.dart';
 export 'resource.dart';
 export 'item.dart';
+export 'type.dart';

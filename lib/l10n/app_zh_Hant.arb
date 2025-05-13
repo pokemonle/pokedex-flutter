@@ -103,5 +103,47 @@
   "formsSwitchable": "可變形態",
   "@formsSwitchable": {
     "description": "The forms switchable label"
+  },
+  "power": "威力",
+  "@power": {
+    "description": "The move power label"
+  },
+  "pp": "PP",
+  "@pp": {
+    "description": "The move PP label"
+  },
+  "accuracy": "命中率",
+  "@accuracy": {
+    "description": "The move accuracy label"
+  },
+  "priority": "優先度",
+  "@priority": {
+    "description": "The move priority label"
+  },
+  "type": "屬性",
+  "@type": {
+    "description": "The move type label"
+  },
+  "damageClass": "傷害類型",
+  "@damageClass": {
+    "description": "The move damage class label"
+  },
+  "damageClassId": "{id, select, physical{物理} special{特殊} status{變化} other{未知}}",
+  "@damageClassId": {
+    "description": "The move damage class ID label",
+    "placeholders": {
+      "id": {
+        "type": "String",
+        "example": "physical"
+      }
+    }
+  },
+  "target": "目標",
+  "@target": {
+    "description": "The move target label"
+  },
+  "effectChance": "效果觸發率",
+  "@effectChance": {
+    "description": "The move effect chance label"
   }
 }
