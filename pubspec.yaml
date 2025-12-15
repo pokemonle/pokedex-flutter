@@ -37,7 +37,7 @@ dependencies:
   flutter_riverpod: ^2.0.0
   http: ^1.4.0
   json_annotation: ^4.9.0
-  shared_preferences: ^2.0.0
+  shared_preferences: ^2.5.4
   flutter_localizations:
     sdk: flutter
   intl: any
